@@ -2,6 +2,7 @@
 
 namespace QuizBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Question
 {
+
     /**
      * @var int
      *
@@ -55,6 +57,33 @@ class Question
      * @ORM\Column(name="opt3", type="string", length=255)
      */
     private $opt3;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="question")
+     */
+    private $comments;
+
+    function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+    }
 
 
     /**

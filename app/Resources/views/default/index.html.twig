@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if app.user %}
+
+        <a href="{{ path('start',{'num':'5'}) }}" type="button" class="btn btn-primary btn-lg btn-block">5 Questions</a>
+        <a href="{{ path('start',{'num':'10'}) }}" type="button" class="btn btn-primary btn-lg btn-block">10 Questions</a>
+        <a href="{{ path('start',{'num':'15'}) }}" type="button" class="btn btn-primary btn-lg btn-block">15 Questions</a>
+        <button type="button" class="btn btn-secondary btn-lg btn-block">What's my Rank ?</button>
+    {% else %}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Welcome to the famous Stani Bogat by Djaro</h1>
+                <p class="lead">If you have a registration you can <a href="{{ path('security_login') }}">Login</a>
+                    to our system , or if you don't just <a href="{{ path('user_register') }}">Sign Up</a></p>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}

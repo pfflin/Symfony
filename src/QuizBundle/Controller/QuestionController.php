@@ -13,11 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuestionController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
-
     /**
      * @Route("/create",name="create_question")
      */
@@ -37,27 +32,35 @@ class QuestionController extends Controller
 
     /**
      *@param Connection $connection
-     * @Route("/start")
+     * @param  int $num
+     * @Route("/start/{num}", name="start")
      */
-    public function startAction(Connection $connection){
-        $arr = $this->getDoctrine()->getRepository(Question::class)->getTenRandom($connection);
+    public function startAction(Connection $connection,$num){
+
+        $arr = $this->getDoctrine()->getRepository(Question::class)->getRandom($connection,$num);
         $this->get('session')->set('arr', json_encode($arr));
         $this->get('session')->set('score', 0);
         $this->get('session')->set('page', 1);
-        return $this->redirect("question/1");
+        $this->get('session')->set('mode', intval($num));
+
+        return $this->redirectToRoute("question",array('id'=>'1'));
     }
     /**
+     * @param Request $request
      * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @Route("/question/{id}",name="question")
      */
-    public function getQuestionsAction(Request $request, $id){
+    public function getQuestionsAction($id){
+        $mode =  $this->get('session')->get('mode');
         //Check if user want's to skip questions or return to previous question
-        if ($this->get('session')->get('page') != $id){
+        if ($this->get('session')->get('page') != $id ){
             return $this->redirect("/start");
         }
-
+        if ($id > $mode){
+            return $this->redirectToRoute("result");
+        }
         $arr =  json_decode($this->get('session')->get('arr'));
-        print_r($arr);
         $questionId = $arr[$id-1];
         $question = $this->getDoctrine()->getRepository(Question::class)->find($questionId);
         if (isset($_POST['answer'])){
@@ -65,24 +68,23 @@ class QuestionController extends Controller
             $this->get('session')->set('page', $this->get('session')->get('page') + 1);
            if (trim($choosed) === $question->getCorrect()){
                $this->get('session')->set('score', $this->get('session')->get('score') + 1);
-               return new Response("correct!", 200, array('Content-Type' => 'text/html'));
+               return new Response("That's correct!", 200, array('Content-Type' => 'text/html'));
            }
            else{
-               return new Response("You can do better than this ;)", 200, array('Content-Type' => 'text/html'));
+               return new Response("You can do better than this", 200, array('Content-Type' => 'text/html'));
            }
-
         }
         return $this->render("question/view.html.twig",['question'=>$question,'id'=>$id+1]);
     }
-
     /**
-     *
-     * @param Connection $connection
-     * @Route("/quest",name="question1")
+     * @return Response
+     * @Route("/result", name="result")
      */
-    public function ajaxAction(Connection $connection)
-    {
-       return $this->getDoctrine()->getRepository(Question::class)->getTen($connection);
-
+    public function getResult(){
+        $mode =  $this->get('session')->get('mode');
+        if ($this->get('session')->get('page') > $mode){
+            return $this->render("question/result.html.twig",['score'=>$this->get('session')->get('score'),'mode'=>$this->get('session')->get('mode')]);
+        }
+        return $this->render("question/result.html.twig",['score'=>'You did not finish the whole quiz. Now you can start from the beginning']);
     }
 }

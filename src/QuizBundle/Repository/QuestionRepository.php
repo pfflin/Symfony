@@ -14,17 +14,10 @@ use QuizBundle\Entity\Question;
  */
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getTenRandom(Connection $connection){
-        $stm = $connection->prepare("SELECT id FROM questions ORDER BY rand() LIMIT 10");
+    public function getRandom(Connection $connection, $num){
+
+        $stm = $connection->prepare("SELECT id FROM questions ORDER BY rand() LIMIT $num");
         $stm->execute([]);
-        return $stm->fetchAll(PDO::FETCH_COLUMN);
-    }
-    public function getQuestions(){
-        $allQuestions = $this->findAll();
-            ;
-        // shuffle records applicable with data of less than 10k
-        shuffle($allQuestions);
-        $questions = array_slice($allQuestions,0,10);
-        return $questions;
+           return $stm->fetchAll(PDO::FETCH_COLUMN);
     }
 }
