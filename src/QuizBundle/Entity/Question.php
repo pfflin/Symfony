@@ -3,6 +3,7 @@
 namespace QuizBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,9 +65,77 @@ class Question
      */
     private $comments;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="authorId", type="integer")
+     */
+    private $authorId;
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="QuizBundle\Entity\User", inversedBy="questions")
+     * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
+     */
+    private $author;
+
+    private $summary;
+
     function __construct()
     {
         $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSummary()
+    {
+       if ($this->summary === null){
+           $this->setSummary();
+       }
+       return $this->summary;
+    }
+
+    public function setSummary()
+    {
+        $this->summary = substr($this->question,0,30);
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     * @return Question
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
+
+    /**
+     * @param int $authorId
+     * @return Question
+     */
+    public function setAuthorId($authorId)
+    {
+        $this->authorId = $authorId;
+        return $this;
     }
 
     /**

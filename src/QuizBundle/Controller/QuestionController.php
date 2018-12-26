@@ -87,4 +87,14 @@ class QuestionController extends Controller
         }
         return $this->render("question/result.html.twig",['score'=>'You did not finish the whole quiz. Now you can start from the beginning']);
     }
+    /**
+     * @Route("/view/{id}", name="getOne")
+     * @param $id
+     * @return Response
+     */
+    public function viewSingleQuestion($id){
+        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
+
+        return $this->render('question/singleQuestion.html.twig',['question'=>$question]);
+    }
 }

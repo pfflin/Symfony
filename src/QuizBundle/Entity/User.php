@@ -2,6 +2,7 @@
 
 namespace QuizBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -49,6 +50,34 @@ class User implements UserInterface
      * @ORM\Column(name="age", type="integer")
      */
     private $age;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Question", mappedBy="author")
+     */
+    private $questions;
+    public function __construct()
+    {
+        $this->questions =new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param ArrayCollection $question
+     * @return User
+     */
+    public function setQuestions($question)
+    {
+        $this->questions[] = $question;
+        return $this;
+    }
 
     /**
      * Get id

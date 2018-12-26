@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="list-group">
+        <h2 type="button" class="list-group-item list-group-item-action active">
+            And the question is " {{ question.question }} "
+        </h2>
+        <p type="button" class="list-group-item list-group-item-action opt">{{ question.opt1 }}</p>
+        <p type="button" class="list-group-item list-group-item-action opt">{{ question.opt2 }}</p>
+        <p type="button" class="list-group-item list-group-item-action opt">{{ question.opt3 }}</p>
+        <hr/>
+        <p type="button" class="list-group-item list-group-item-action opt">The right answer is: {{ question.correct }}</p>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-default btn-lg"
+           href="{{ path('getOne',{'id': question.id}) }}">Edit &raquo;</a>
+    </div>
+    <div class="detailBox">
+        <div class="titleBox">
+            <label>Comments</label>
+            <button type="button" class="close" aria-hidden="true">&times;</button>
+        </div>
+        <div class="actionBox">
+            <ul class="commentList">
+                {% for comment in question.comments %}
+                    <li>
+                        <div class="commenterImage">
+                            <img src="http://placekitten.com/50/50" />
+                        </div>
+                        <div class="commentText">
+                            <p class="">{{ comment.content }}</p> <span class="date sub-text">on {{ comment.dateAdded|date('Y-m-d') }}</span>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Let us know what you think" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
