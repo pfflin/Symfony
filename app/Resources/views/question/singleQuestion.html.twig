@@ -5,15 +5,15 @@
         <h2 type="button" class="list-group-item list-group-item-action active">
             And the question is " {{ question.question }} "
         </h2>
-        <p type="button" class="list-group-item list-group-item-action opt">{{ question.opt1 }}</p>
-        <p type="button" class="list-group-item list-group-item-action opt">{{ question.opt2 }}</p>
-        <p type="button" class="list-group-item list-group-item-action opt">{{ question.opt3 }}</p>
+        <p class="list-group-item list-group-item-action opt">{{ question.opt1 }}</p>
+        <p class="list-group-item list-group-item-action opt">{{ question.opt2 }}</p>
+        <p class="list-group-item list-group-item-action opt">{{ question.opt3 }}</p>
         <hr/>
         <p type="button" class="list-group-item list-group-item-action opt">The right answer is: {{ question.correct }}</p>
     </div>
     <div class="text-center">
         <a class="btn btn-default btn-lg"
-           href="{{ path('getOne',{'id': question.id}) }}">Edit &raquo;</a>
+           href="{{ path('edit',{'id': question.id}) }}">Edit &raquo;</a>
     </div>
     <div class="detailBox">
         <div class="titleBox">
@@ -44,6 +44,5 @@
             </form>
         </div>
     </div>
-
 
 {% endblock %}

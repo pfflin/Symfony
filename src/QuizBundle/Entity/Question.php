@@ -3,7 +3,6 @@
 namespace QuizBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,17 +59,16 @@ class Question
     private $opt3;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="question")
-     */
-    private $comments;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="authorId", type="integer")
      */
     private $authorId;
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="question")
+     */
+    private $comments;
 
     /**
      * @var User
@@ -85,7 +83,6 @@ class Question
     {
         $this->comments = new ArrayCollection();
     }
-
     /**
      * @return mixed
      */
@@ -129,7 +126,7 @@ class Question
     }
 
     /**
-     * @param int $authorId
+     * @param integer $authorId
      * @return Question
      */
     public function setAuthorId($authorId)

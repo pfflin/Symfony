@@ -15,19 +15,26 @@ class QuestionController extends Controller
 {
     /**
      * @Route("/create",name="create_question")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function createQuestion(Request $request){
         $question = new Question();
         $form = $this->createForm(QuestionType::class,$question);
-        $form->add("submit",SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted()){
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($question);
-            $em->flush();
-            return $this->redirectToRoute("homepage");
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            if ($question->getCorrect() == $question->getOpt1() || $question->getCorrect() == $question->getOpt2() || $question->getCorrect() == $question->getOpt3()){
+                $em = $this->getDoctrine()->getManager();
+                $question->setAuthor($this->getUser());
+                $em->persist($question);
+                $em->flush();
+                return $this->redirectToRoute("user_profile");
+            }
+
         }
-        return $this->render('question/create.html.twig', array('form' => $form->createView()));
+        return $this->render('question/create.html.twig',['question'=>$question,'form'=>$form->createView(),'authorId'=>$this->getUser()->getId()]);
     }
 
     /**
@@ -96,5 +103,24 @@ class QuestionController extends Controller
         $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
 
         return $this->render('question/singleQuestion.html.twig',['question'=>$question]);
+    }
+    /**
+     * @Route("/edit/{id}", name="edit")
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function editSingleQuestion(Request $request,$id){
+        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
+        $form = $this->createForm(QuestionType::class,$question);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            if ($question->getCorrect() == $question->getOpt1() || $question->getCorrect() == $question->getOpt2() || $question->getCorrect() == $question->getOpt3()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($question);
+                $em->flush();
+            }
+        }
+        return $this->render('question/edit.html.twig',['question'=>$question,'form'=>$form->createView()]);
     }
 }

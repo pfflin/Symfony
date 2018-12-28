@@ -17,7 +17,8 @@ class QuestionType extends AbstractType
             ->add('correct')
             ->add('opt1')
             ->add('opt2')
-            ->add('opt3');
+            ->add('opt3')
+            ->add('authorId');
     }/**
      * {@inheritdoc}
      */
