@@ -28,4 +28,28 @@
 
         {% endfor %}
     </ul>
+    <div class="row">
+    <h2>Your Comments</h2>
+    </div>
+    <ul>
+        {% for comment in user.comments %}
+            <div class="col-md-6">
+                <article>
+                    <header>
+                        <h6>{{ comment.content }}</h6>
+                    </header>
+                    <small class="author">
+                        {{ comment.question.summary }}
+                    </small>
+                    <footer>
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('getOne',{'id': comment.questionId})}}">See the question&raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+
+        {% endfor %}
+    </ul>
 {% endblock %}

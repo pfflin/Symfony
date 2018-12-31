@@ -4,6 +4,7 @@ namespace QuizBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
 
 /**
  * Question
@@ -79,10 +80,41 @@ class Question
 
     private $summary;
 
+    /**
+     * @var ArrayCollection
+     * Many Questions have Many Users-likes.
+     * @ManyToMany(targetEntity="User", mappedBy="likes")
+     */
+    private $users;
+
     function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->users = new  ArrayCollection();
     }
+    public function isLiked(User $user){
+
+        return $this->users->contains($user);
+    }
+    /**
+     * @return ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param User $user
+     * @return Question
+     */
+    public function setUsers (User $user)
+    {
+        $this->users[] = $user;
+        return $this;
+
+    }
+
     /**
      * @return mixed
      */
@@ -142,7 +174,6 @@ class Question
     {
         return $this->comments;
     }
-
     /**
      * @param Comment $comment
      */

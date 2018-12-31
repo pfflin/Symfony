@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends Controller
 {
     /**
-     * @param $name
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/register", name="user_register")
      */

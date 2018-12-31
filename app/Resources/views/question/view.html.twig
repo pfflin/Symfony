@@ -11,26 +11,18 @@
         <hr/>
         <h6>Question Number: {{ id-1 }}</h6>
     </div>
+    {% if question.isLiked(app.user) %}
+        <a class="unlike" href=""><i class="glyphicon glyphicon-thumbs-down"></i>Remove vote</a>
 
+    {% else %}
+        <a class="like" href=""> <i class="glyphicon glyphicon-thumbs-up"></i>Vote up</a>
+    {% endif %}
     <div class="detailBox">
         <div class="titleBox">
             <label>Comments</label>
             <button type="button" class="close" aria-hidden="true">&times;</button>
         </div>
         <div class="actionBox">
-            <ul class="commentList">
-                {% for comment in question.comments %}
-                <li>
-                    <div class="commenterImage">
-                  <img src="http://placekitten.com/50/50" />
-                    </div>
-                    <div class="commentText">
-                    <p class="">{{ comment.content }}</p> <span class="date sub-text">on {{ comment.dateAdded|date('Y-m-d') }}</span>
-
-                    </div>
-                </li>
-        {% endfor %}
-            </ul>
             <form class="form-inline" role="form">
                 <div class="form-group">
                     <input class="form-control" type="text" placeholder="Let us know what you think" />
@@ -56,4 +48,32 @@
             </div>
         </div>
         </div>
+    <script>
+        $(".like").on('click', function(){
+            $.ajax({
+                url:'{{ (path('likeQuestion',{'id':question.id})) }}',
+                type: "POST",
+                dataType: "json",
+                async: true,
+                success: function (data)
+                {
+                    console.log(data)
+                }
+            });
+            return false;
+        });
+        $(".unlike").on('click', function(){
+            $.ajax({
+                url:'{{ (path('unlikeQuestion',{'id':question.id})) }}',
+                type: "POST",
+                dataType: "json",
+                async: true,
+                success: function (data)
+                {
+                    console.log(data)
+                }
+            });
+            return false;
+        });
+    </script>
 {% endblock %}

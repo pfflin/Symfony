@@ -4,6 +4,9 @@ namespace QuizBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -56,9 +59,107 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Question", mappedBy="author")
      */
     private $questions;
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="author")
+     */
+    private $comments;
+
+    /**
+     * @var ArrayCollection
+     * Many Users have liked many Questions.
+     * @ORM\ManyToMany(targetEntity="QuizBundle\Entity\Question")
+     * @ORM\JoinTable(name="users_questions",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="questionId", referencedColumnName="id")}
+     *      )
+     */
+
+    private $likes;
+
+    /**
+     * @var ArrayCollection
+     * Many Users have liked many Comments.
+     * @ORM\ManyToMany(targetEntity="QuizBundle\Entity\Comment")
+     * @ORM\JoinTable(name="users_comments",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="commentId", referencedColumnName="id")}
+     *      )
+     */
+
+    private $likedComments;
+
     public function __construct()
     {
         $this->questions =new ArrayCollection();
+        $this->comments =new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->likedComments = new ArrayCollection();
+
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikedComments()
+    {
+        return $this->likedComments;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return User
+     */
+    public function setLikedComments(Comment $comment)
+    {
+        $this->likedComments[] = $comment;
+        return $this;
+    }
+
+    public function removeLikedComment(Comment $comment){
+        $this->likedComments->removeElement($comment);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * @param Question $like
+     * @return User
+     */
+    public function setLikes(Question $like)
+    {
+        $this->likes[] = $like;
+        return $this;
+    }
+    public function removeLikes(Question $question){
+        $this->getLikes()->removeElement($question);
+    }
+    public function isAuthor($id){
+        return $id == $this->getId();
+    }
+    /**
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection $comment
+     * @return User
+     */
+    public function setComments(Comment $comment)
+    {
+        $this->comments[] = $comment;
+        return $this;
     }
 
     /**

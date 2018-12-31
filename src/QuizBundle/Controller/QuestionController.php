@@ -3,10 +3,12 @@
 namespace QuizBundle\Controller;
 
 use Doctrine\DBAL\Connection;
+use QuizBundle\Entity\Comment;
 use QuizBundle\Entity\Question;
+use QuizBundle\Entity\User;
+use QuizBundle\Form\CommentType;
 use QuizBundle\Form\QuestionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -100,9 +102,13 @@ class QuestionController extends Controller
      * @return Response
      */
     public function viewSingleQuestion($id){
+        /**
+         * @var Question $question
+         */
         $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-
-        return $this->render('question/singleQuestion.html.twig',['question'=>$question]);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class,$comment);
+        return $this->render('question/singleQuestion.html.twig',['question'=>$question, 'form'=> $form->createView()]);
     }
     /**
      * @Route("/edit/{id}", name="edit")

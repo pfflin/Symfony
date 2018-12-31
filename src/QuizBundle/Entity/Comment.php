@@ -2,7 +2,9 @@
 
 namespace QuizBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
 
 /**
  * Comment
@@ -42,9 +44,90 @@ class Comment
      */
     private $questionId;
 
+    /**
+     * @var int
+     * @ORM\Column(name="authorId", type="integer")
+     */
+    private $authorId;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="QuizBundle\Entity\User",inversedBy="comments")
+     * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
+     */
+    private $author;
+
+
+    /**
+     * @var ArrayCollection
+     * Many Comments have Many Users-likes.
+     * @ManyToMany(targetEntity="User", mappedBy="likedComments")
+     */
+    private $users;
     function __construct()
     {
         $this->dateAdded=new \DateTime('now');
+        $this->users = new ArrayCollection();
+    }
+
+    public function isLiked(User $user){
+
+        return $this->users->contains($user);
+    }
+    /**
+     * @return ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param User $user
+     * @return Comment
+     */
+    public function setUsers (User $user)
+    {
+        $this->users[] = $user;
+        return $this;
+
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     * @return Comment
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
+
+    /**
+     * @param int $authorId
+     * @return Comment
+     */
+    public function setAuthorId($authorId)
+    {
+        $this->authorId = $authorId;
+        return $this;
     }
 
     /**

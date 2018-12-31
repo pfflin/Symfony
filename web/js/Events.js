@@ -21,6 +21,5 @@
     span.on("click", function() {
         modal.css("display", "none");
         $(".loader").css("display", "block");
-
-    })
+    });
 })();
