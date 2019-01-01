@@ -16,7 +16,8 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getRandom(Connection $connection, $num){
 
-        $stm = $connection->prepare("SELECT id FROM questions ORDER BY rand() LIMIT $num");
+        $sql = "SELECT id FROM questions ORDER BY rand() LIMIT $num";
+        $stm = $connection->prepare($sql);
         $stm->execute([]);
            return $stm->fetchAll(PDO::FETCH_COLUMN);
     }

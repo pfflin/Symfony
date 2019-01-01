@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LikesController extends Controller
 {
     /**
-     * @Route("/likeQuestion{id}", name="likeQuestion")
+     * @Route("/likeQuestion{id}", name="likeQuestion",requirements={"id"="\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -39,7 +39,7 @@ class LikesController extends Controller
         }
     }
     /**
-     * @Route("/unlikeQuestion{id}", name="unlikeQuestion")
+     * @Route("/unlikeQuestion{id}", name="unlikeQuestion",requirements={"id"="\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -64,7 +64,7 @@ class LikesController extends Controller
         }
     }
     /**
-     * @Route("/likeQuestionAndRedirect/{id}", name="likeQuestionAndRedirect")
+     * @Route("/likeQuestionAndRedirect/{id}", name="likeQuestionAndRedirect",requirements={"id"="\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -85,7 +85,7 @@ class LikesController extends Controller
             return $this->redirectToRoute("getOne",array('id'=>$id));
     }
     /**
-     * @Route("/unlikeQuestionAndRedirect/{id}", name="unlikeQuestionAndRedirect")
+     * @Route("/unlikeQuestionAndRedirect/{id}", name="unlikeQuestionAndRedirect",requirements={"id"="\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -107,7 +107,7 @@ class LikesController extends Controller
     }
 
     /**
-     * @Route("/likeCommentAndRedirect/{id}", name="likeCommentAndRedirect")
+     * @Route("/likeCommentAndRedirect/{id}", name="likeCommentAndRedirect",requirements={"id"="\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -128,7 +128,7 @@ class LikesController extends Controller
         return $this->redirectToRoute("getOne",array('id'=>$comment->getQuestionId()));
     }
     /**
-     * @Route("/unlikeCommentAndRedirect/{id}", name="unlikeCommentAndRedirect")
+     * @Route("/unlikeCommentAndRedirect/{id}", name="unlikeCommentAndRedirect",requirements={"id"="\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */

@@ -40,9 +40,10 @@ class QuestionController extends Controller
     }
 
     /**
-     *@param Connection $connection
+     * @param Connection $connection
      * @param  int $num
-     * @Route("/start/{num}", name="start")
+     * @Route("/start/{num}", name="start",requirements={"num"="^(5|10|15)$"})
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function startAction(Connection $connection,$num){
 
@@ -54,11 +55,11 @@ class QuestionController extends Controller
 
         return $this->redirectToRoute("question",array('id'=>'1'));
     }
+
     /**
-     * @param Request $request
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @Route("/question/{id}",name="question")
+     * @Route("/question/{id}",name="question", requirements={"id"="\d+"})
      */
     public function getQuestionsAction($id){
         $mode =  $this->get('session')->get('mode');
@@ -97,7 +98,7 @@ class QuestionController extends Controller
         return $this->render("question/result.html.twig",['score'=>'You did not finish the whole quiz. Now you can start from the beginning']);
     }
     /**
-     * @Route("/view/{id}", name="getOne")
+     * @Route("/view/{id}", name="getOne", requirements={"id"="\d+"})
      * @param $id
      * @return Response
      */
@@ -111,7 +112,7 @@ class QuestionController extends Controller
         return $this->render('question/singleQuestion.html.twig',['question'=>$question, 'form'=> $form->createView()]);
     }
     /**
-     * @Route("/edit/{id}", name="edit")
+     * @Route("/edit/{id}", name="edit",requirements={"id"="\d+"})
      * @param Request $request
      * @param $id
      * @return Response

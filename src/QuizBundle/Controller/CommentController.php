@@ -36,7 +36,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route("/removeComment{id}", name="removeComment")
+     * @Route("/removeComment{id}", name="removeComment",requirements={"id"="\d+"})
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
