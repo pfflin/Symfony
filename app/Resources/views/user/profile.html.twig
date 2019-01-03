@@ -2,9 +2,7 @@
 
 {% block main %}
     <h1>Hello, {{ user.fullName }}</h1>
-
     <h2>Your questions</h2>
-
     <ul>
         {% for question in user.questions %}
             <div class="col-md-6">
@@ -25,9 +23,12 @@
                     </footer>
                 </article>
             </div>
-
         {% endfor %}
     </ul>
+    <a href="{{ path('user_likes') }}">Questions you liked</a>
+
+    <a href="{{ path('user_commented') }}">Questions you have commented on</a>
+
     <div class="row">
     <h2>Your Comments</h2>
     </div>

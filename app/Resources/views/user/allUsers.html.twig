@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="single category">
+                <h3 class="side-title">Ranking</h3>
+                <ul class="list-unstyled">
+                    {% for user in users %}
+                        <li>{{ loop.index }} : <span>{{ user.fullName }}<span class="pull-right">{{ user.totalRank }}</span></span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

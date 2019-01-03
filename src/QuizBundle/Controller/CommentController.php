@@ -41,8 +41,12 @@ class CommentController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function removeComment($id)
-    {
+    {/** @var Comment $comment */
             $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id);
+                 $currentUser = $this->getUser();
+        if ($comment === null || !$currentUser->isAuthor($comment->getAuthorId()) && !$currentUser->isAdmin()){
+            return $this->redirectToRoute("homepage");
+        }
             $em = $this->getDoctrine()->getManager();
             $em->remove($comment);
             $em->flush();

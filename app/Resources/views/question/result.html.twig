@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>Your Score is : {{ score }} out of {{ mode }} Questions</h1>
+    {% for msg in app.session.flashBag.get('info') %}
+        <div class="alert alert-warning">{{ msg }}</div>
+    {% endfor %}
+    <a href="{{ path('homepage') }}">Back to the main page</a>
 {% endblock %}
 

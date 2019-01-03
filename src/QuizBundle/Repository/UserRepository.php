@@ -2,6 +2,8 @@
 
 namespace QuizBundle\Repository;
 
+use QuizBundle\Entity\User;
+
 /**
  * UserRepository
  *
@@ -10,4 +12,18 @@ namespace QuizBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllUsers()
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select(User::class)
+            ->from('User', 'u')
+            ->where('u.id = ?1')
+            ->orderBy('u.name', 'ASC');
+
+
+
+
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

@@ -57,8 +57,6 @@ class Comment
      * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
      */
     private $author;
-
-
     /**
      * @var ArrayCollection
      * Many Comments have Many Users-likes.

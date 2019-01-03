@@ -1,16 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <form name="authenticate" action="{{ path('security_login') }}" method="post">
-        <label>
-            <input name="_username" type="text">
-        </label>
-        <label>
-            <input name="_password" type="text">
-        </label>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <input type="submit" value="Login">
-    </form>
+    {% for msg in app.session.flashBag.get('info') %}
+        <div class="alert alert-warning">{{ msg }}</div>
+    {% endfor %}
     <form name="authenticate" action="{{ path('security_login') }}" method="post">
         <div class="form-group" >
             <label>Email</label>

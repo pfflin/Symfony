@@ -89,16 +89,105 @@ class User implements UserInterface
      */
 
     private $likedComments;
-
+    /**
+     * @var ArrayCollection
+     * @ManyToMany(targetEntity="QuizBundle\Entity\Role")
+     * @JoinTable(name="users_roles",
+     *     joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="role_id",referencedColumnName="id")})
+     */
+    private $roles;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rank_from_quiz", type="integer", nullable=true, options={"default" : 0})
+     */
+    private $rankFromQuiz;
+    private $rankFromQuestions;
+    private $rankFromLikes;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="total_rank", type="integer", nullable=true, options={"default" : 0})
+     */
+    private $totalRank;
     public function __construct()
     {
         $this->questions =new ArrayCollection();
         $this->comments =new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->likedComments = new ArrayCollection();
-
+        $this->roles = new ArrayCollection();
     }
 
+    /**
+     * @return int
+     */
+    public function getTotalRank()
+    {
+        return $this->totalRank;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRankFromQuiz()
+    {
+        return $this->rankFromQuiz;
+    }
+
+    /**
+     * @param int $rankFromQuiz
+     */
+    public function setRankFromQuiz($rankFromQuiz)
+    {
+        $this->rankFromQuiz = $rankFromQuiz;
+    }
+    public function setRankFromQuestions(){
+        $this->rankFromQuestions = $this->questions->count();
+    }
+    public function setRankFromLikes(){
+        $this->rankFromLikes=0;
+        $closure = function($key, $element){
+            $this->rankFromLikes += floor($element->getUsers()->count()/5);
+            return true;
+        };
+        $this->questions->forAll($closure);
+        $this->comments->forAll($closure);
+    }
+
+    /**
+     * @return int
+     */
+    public function getRankFromQuestions()
+    {
+        return $this->rankFromQuestions;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRankFromLikes()
+    {
+        return $this->rankFromLikes;
+    }
+
+    public function setTotalRank()
+    {
+        $this->setRankFromQuestions();
+        $this->setRankFromLikes();
+        $this->totalRank = $this->rankFromLikes + $this->rankFromQuestions;
+    }
+
+    public function isCommented(Question $question){
+        $closure = function($key, $element) use ($question){
+            return $question->getId() === $element->getQuestionId();
+        };
+         if ($this->comments->exists($closure)){
+             return true;
+         };
+         return false;
+    }
     /**
      * @return ArrayCollection
      */
@@ -144,6 +233,12 @@ class User implements UserInterface
     public function isAuthor($id){
         return $id == $this->getId();
     }
+    public function likedQuestion(Question $question){
+        return $this->likes->contains($question);
+    }
+    public function isAdmin(){
+        return in_array("ROLE_ADMIN",$this->getRoles());
+    }
     /**
      * @return ArrayCollection
      */
@@ -151,9 +246,16 @@ class User implements UserInterface
     {
         return $this->comments;
     }
+    public function getCommentedQuestions(){
+        $questions = new ArrayCollection();
+        foreach ($this->comments as $comment){
+            $questions[] = $comment->getQuestion();
+        }
+        return $questions;
+    }
 
     /**
-     * @param ArrayCollection $comment
+     * @param Comment $comment
      * @return User
      */
     public function setComments(Comment $comment)
@@ -275,13 +377,22 @@ class User implements UserInterface
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return (Role|string)[] The user roles
+     * @return array (Role|string)[] The user roles
      */
     public function getRoles()
     {
-        return ["ROLE_USER"];
+        $stringRoles = [];
+        foreach ($this->roles as $role){
+            /** @var $role Role */
+            $stringRoles[] = $role->getRole();
+        }
+        return $stringRoles;
     }
 
+    public function addRole(Role $role){
+        $this->roles[]=$role;
+        return $this;
+    }
     /**
      * Returns the salt that was originally used to encode the password.
      *

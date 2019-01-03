@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>Hello, {{ user.fullName }}</h1>
+    <h2>Questions you have commented on</h2>
+    <ul>
+        {% for question in user.getCommentedQuestions %}
+            <div class="col-md-6">
+                <article>
+                    <header>
+                        <h2>{{ question.summary }}</h2>
+                    </header>
+                    <small class="author">
+                        {{ question.correct }}
+                    </small>
+                    <footer>
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('getOne',{'id': question.id}) }}">Read more&raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        {% endfor %}
+    </ul>
+{% endblock %}

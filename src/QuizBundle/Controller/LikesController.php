@@ -27,6 +27,9 @@ class LikesController extends Controller
          * @var User $user
          */
         $user = $this->getUser();
+        if (!$question->getAuthorId() == $user->getId()){
+            return new Response("You can't vote for your own questions", 200, array('Content-Type' => 'text/html'));
+        }
         $user->setLikes($question);
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
@@ -78,6 +81,9 @@ class LikesController extends Controller
          * @var User $user
          */
         $user = $this->getUser();
+        if ($question->getAuthorId() == $user->getId()){
+            return new Response("You can't vote for your own questions", 200, array('Content-Type' => 'text/html'));
+        }
         $user->setLikes($question);
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
@@ -105,7 +111,6 @@ class LikesController extends Controller
             $em->flush();
         return $this->redirectToRoute("getOne",array('id'=>$id));
     }
-
     /**
      * @Route("/likeCommentAndRedirect/{id}", name="likeCommentAndRedirect",requirements={"id"="\d+"})
      * @param $id
@@ -121,6 +126,9 @@ class LikesController extends Controller
          * @var User $user
          */
         $user = $this->getUser();
+        if (!$comment->getAuthorId() == $user->getId()){
+            return new Response("You can't vote for your own questions", 200, array('Content-Type' => 'text/html'));
+        }
         $user->setLikedComments($comment);
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);

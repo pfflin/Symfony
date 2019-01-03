@@ -103,7 +103,6 @@ class Question
     {
         return $this->users;
     }
-
     /**
      * @param User $user
      * @return Question
@@ -114,7 +113,6 @@ class Question
         return $this;
 
     }
-
     /**
      * @return mixed
      */
@@ -125,12 +123,10 @@ class Question
        }
        return $this->summary;
     }
-
     public function setSummary()
     {
-        $this->summary = substr($this->question,0,30);
+        $this->summary = substr($this->question,0,22)."...";
     }
-
     /**
      * @return User
      */
@@ -138,7 +134,6 @@ class Question
     {
         return $this->author;
     }
-
     /**
      * @param User $author
      * @return Question
@@ -148,7 +143,6 @@ class Question
         $this->author = $author;
         return $this;
     }
-
     /**
      * @return int
      */
@@ -156,7 +150,6 @@ class Question
     {
         return $this->authorId;
     }
-
     /**
      * @param integer $authorId
      * @return Question
@@ -166,7 +159,6 @@ class Question
         $this->authorId = $authorId;
         return $this;
     }
-
     /**
      * @return ArrayCollection
      */
@@ -181,8 +173,6 @@ class Question
     {
         $this->comments[] = $comment;
     }
-
-
     /**
      * Get id
      *
@@ -192,7 +182,6 @@ class Question
     {
         return $this->id;
     }
-
     /**
      * Set question
      *
@@ -206,7 +195,6 @@ class Question
 
         return $this;
     }
-
     /**
      * Get question
      *
@@ -216,7 +204,6 @@ class Question
     {
         return $this->question;
     }
-
     /**
      * Set correct
      *
@@ -230,7 +217,6 @@ class Question
 
         return $this;
     }
-
     /**
      * Get correct
      *
@@ -240,7 +226,6 @@ class Question
     {
         return $this->correct;
     }
-
     /**
      * Set opt1
      *
@@ -254,7 +239,6 @@ class Question
 
         return $this;
     }
-
     /**
      * Get opt1
      *
@@ -264,7 +248,6 @@ class Question
     {
         return $this->opt1;
     }
-
     /**
      * Set opt2
      *
@@ -278,7 +261,6 @@ class Question
 
         return $this;
     }
-
     /**
      * Get opt2
      *
@@ -288,7 +270,6 @@ class Question
     {
         return $this->opt2;
     }
-
     /**
      * Set opt3
      *
@@ -302,7 +283,6 @@ class Question
 
         return $this;
     }
-
     /**
      * Get opt3
      *

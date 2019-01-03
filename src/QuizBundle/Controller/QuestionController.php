@@ -5,6 +5,7 @@ namespace QuizBundle\Controller;
 use Doctrine\DBAL\Connection;
 use QuizBundle\Entity\Comment;
 use QuizBundle\Entity\Question;
+use QuizBundle\Entity\Text;
 use QuizBundle\Entity\User;
 use QuizBundle\Form\CommentType;
 use QuizBundle\Form\QuestionType;
@@ -81,7 +82,7 @@ class QuestionController extends Controller
                return new Response("That's correct!", 200, array('Content-Type' => 'text/html'));
            }
            else{
-               return new Response("You can do better than this", 200, array('Content-Type' => 'text/html'));
+               return new Response("Sorry, that was not the right answer", 200, array('Content-Type' => 'text/html'));
            }
         }
         return $this->render("question/view.html.twig",['question'=>$question,'id'=>$id+1]);
@@ -92,10 +93,23 @@ class QuestionController extends Controller
      */
     public function getResult(){
         $mode =  $this->get('session')->get('mode');
-        if ($this->get('session')->get('page') > $mode){
-            return $this->render("question/result.html.twig",['score'=>$this->get('session')->get('score'),'mode'=>$this->get('session')->get('mode')]);
+        if ($this->get('session')->get('page') > $mode) {
+            /** @var User $user */
+            $user = $this->getUser();
+            if ($this->get('session')->get('score') === $this->get('session')->get('mode')) {
+                $score = $this->get('session')->get('score')/5;
+                $user->setRankFromQuiz($user->getRankFromQuiz() + $score);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('info',"You Have been rewarded with $score points");
+            return $this->render("question/result.html.twig");
         }
-        return $this->render("question/result.html.twig",['score'=>'You did not finish the whole quiz. Now you can start from the beginning']);
+            $this->addFlash('info',"You didn't get all the answers right this time, try again");
+            return $this->render("question/result.html.twig");
+        }
+        $this->addFlash('info',"You did not finish the whole quiz. Now you can start from the beginning");
+        return $this->render("question/result.html.twig");
     }
     /**
      * @Route("/view/{id}", name="getOne", requirements={"id"="\d+"})
@@ -107,6 +121,12 @@ class QuestionController extends Controller
          * @var Question $question
          */
         $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+        // if such question does not exist, or if user hasn't liked or comment on it and is not author or admin redirect...
+        if ($question === null || !$currentUser->likedQuestion($question) && !$currentUser->isCommented($question) && !$currentUser->isAdmin() && !$currentUser->isAuthor($question->getAuthorId())){
+            return $this->redirectToRoute("homepage");
+        }
         $comment = new Comment();
         $form = $this->createForm(CommentType::class,$comment);
         return $this->render('question/singleQuestion.html.twig',['question'=>$question, 'form'=> $form->createView()]);
@@ -119,6 +139,10 @@ class QuestionController extends Controller
      */
     public function editSingleQuestion(Request $request,$id){
         $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
+        $currentUser = $this->getUser();
+        if ($question === null || !$currentUser->isAuthor($question->getAuthorId()) && !$currentUser->isAdmin()){
+            return $this->redirectToRoute("homepage");
+        }
         $form = $this->createForm(QuestionType::class,$question);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){

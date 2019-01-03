@@ -11,16 +11,21 @@
         <hr/>
         <p type="button" class="list-group-item list-group-item-action opt">The right answer is: {{ question.correct }}</p>
     </div>
+    {% if not app.user.isAuthor(question.authorId) %}
+
     {% if question.isLiked(app.user) %}
         <a class="unlike" href="{{ path('unlikeQuestionAndRedirect',{'id':question.id}) }}"><i class="glyphicon glyphicon-thumbs-down"></i></a>
     {% else %}
         <a class="like" href="{{ path('likeQuestionAndRedirect',{'id':question.id}) }}"><i class="glyphicon glyphicon-thumbs-up"></i></a>
     {% endif %}
+    {% endif %}
     <div>Total votes:{{ question.users|length }}</div>
+    {% if app.user.isAuthor(question.authorId) %}
     <div class="text-center">
         <a class="btn btn-default btn-lg"
            href="{{ path('edit',{'id': question.id}) }}">Edit &raquo;</a>
     </div>
+    {% endif %}
     <div class="detailBox">
         <div class="titleBox">
             <label>Comments</label>
@@ -36,13 +41,14 @@
                         </div>
                         {%if app.user.isAuthor(comment.authorId)%}
                         <a href="{{ path('removeComment',{'id':comment.id}) }}">Delete</a>
-                        {% endif %}
-                        {% if question.isLiked(app.user) %}
+                        {% else %}
+                        {% if comment.isLiked(app.user) %}
                             <a class="unlike" href="{{ path('unlikeCommentAndRedirect',{'id':comment.id}) }}"><i class="glyphicon glyphicon-thumbs-down"></i></a>
                         {% else %}
                             <a class="like" href="{{ path('likeCommentAndRedirect',{'id':comment.id}) }}"><i class="glyphicon glyphicon-thumbs-up"></i></a>
                         {% endif %}
-                        <div>Total votes:{{ comment.users|length }}</div>
+                        {% endif %}
+                            <div>Total votes:{{ comment.users|length }}</div>
                     </li>
                 {% endfor %}
             </ul>

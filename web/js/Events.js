@@ -8,7 +8,6 @@
         $.ajax({
             method: "POST",
             url: url,
-            cache: false,
             data: data,
             success:function (ans) {
                 $("#answer").text(ans);
