@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+   {% for msg in app.session.flashBag.get('info') %}
+      <div class="alert alert-danger">{{ msg }}</div>
+   {% endfor %}
    <form class="form-horizontal" action="{{ path('create_question')}}" method="POST">
       <fieldset>
          <legend>Create Question</legend>

@@ -2,6 +2,9 @@
 
 namespace QuizBundle\Repository;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
 use QuizBundle\Entity\User;
 
 /**
@@ -12,18 +15,22 @@ use QuizBundle\Entity\User;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new Mapping\ClassMetadata(User::class));
+    }
+
     public function getAllUsers()
     {
         $qb = $this->createQueryBuilder('u');
         $qb->select(User::class)
             ->from('User', 'u')
-            ->where('u.id = ?1')
             ->orderBy('u.name', 'ASC');
-
-
-
-
         return $qb->getQuery()
             ->getResult();
+    }
+    public function getAll(){
+       return $this->findAll();
+
     }
 }

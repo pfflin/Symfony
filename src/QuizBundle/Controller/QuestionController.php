@@ -21,23 +21,27 @@ class QuestionController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function createQuestion(Request $request){
+    public function createQuestion(Request $request)
+    {
         $question = new Question();
-        $form = $this->createForm(QuestionType::class,$question);
+        $form = $this->createForm(QuestionType::class, $question);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()){
-
-            if ($question->getCorrect() == $question->getOpt1() || $question->getCorrect() == $question->getOpt2() || $question->getCorrect() == $question->getOpt3()){
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->get('session')->get("addQuestion") == "true") {
+            if ($question->getCorrect() == $question->getOpt1() || $question->getCorrect() == $question->getOpt2() || $question->getCorrect() == $question->getOpt3()) {
                 $em = $this->getDoctrine()->getManager();
                 $question->setAuthor($this->getUser());
                 $em->persist($question);
                 $em->flush();
+                $this->get('session')->set("addQuestion", "false");
+                $this->addFlash("info", "Thank you for your question");
                 return $this->redirectToRoute("user_profile");
             }
-
+            $this->addFlash("info", "The correct answer must be exactly the same as one of the answers");
         }
-        return $this->render('question/create.html.twig',['question'=>$question,'form'=>$form->createView(),'authorId'=>$this->getUser()->getId()]);
+            $this->addFlash("info", "First you have to pass the test perfectly with at least 10 questions");
+    }
+        return $this->render('question/create.html.twig',['question'=>$question,'form'=>$form->createView()]);
     }
 
     /**
@@ -98,11 +102,19 @@ class QuestionController extends Controller
             $user = $this->getUser();
             if ($this->get('session')->get('score') === $this->get('session')->get('mode')) {
                 $score = $this->get('session')->get('score')/5;
+                if ($score === 3){
+                    $score +=3;
+                }
                 $user->setRankFromQuiz($user->getRankFromQuiz() + $score);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
+                $this->get('session')->set('score',0);
                 $this->addFlash('info',"You Have been rewarded with $score points");
+                if ($score > 1){
+                    $this->addFlash('info',"You can contribute and add a question");
+                    $this->get('session')->set("addQuestion", "true");
+                }
             return $this->render("question/result.html.twig");
         }
             $this->addFlash('info',"You didn't get all the answers right this time, try again");

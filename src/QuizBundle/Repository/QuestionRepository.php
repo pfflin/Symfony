@@ -15,10 +15,10 @@ use QuizBundle\Entity\Question;
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getRandom(Connection $connection, $num){
-
-        $sql = "SELECT id FROM questions ORDER BY rand() LIMIT $num";
-        $stm = $connection->prepare($sql);
-        $stm->execute([]);
+        $num = intval($num);
+        $stm = $connection->prepare("SELECT id FROM questions ORDER BY rand() LIMIT :num");
+        $stm->bindParam(':num',$num, PDO::PARAM_INT);
+        $stm->execute();
            return $stm->fetchAll(PDO::FETCH_COLUMN);
     }
 }

@@ -172,11 +172,11 @@ class User implements UserInterface
         return $this->rankFromLikes;
     }
 
-    public function setTotalRank()
+    public function setTotalRank($rankFromQuiz)
     {
         $this->setRankFromQuestions();
         $this->setRankFromLikes();
-        $this->totalRank = $this->rankFromLikes + $this->rankFromQuestions;
+        $this->totalRank = $this->rankFromLikes + $this->rankFromQuestions + $rankFromQuiz;
     }
 
     public function isCommented(Question $question){
