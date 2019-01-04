@@ -23,10 +23,17 @@
             <button type="button" class="close" aria-hidden="true">&times;</button>
         </div>
         <div class="actionBox">
-            <form class="form-inline" role="form">
+            <form class="form-inline" action="{{ path('question',{'id':id-1})}}" method="POST" role="form">
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Let us know what you think" />
+                    <input id="article_content" name="quiz_bundle_comment_type[content]" class="form-control" type="text" placeholder="Let us know what you think" />
                 </div>
+                <div style="display: none" class="form-group">
+                    <input id="article_content" value="{{ question.id }}" name="quiz_bundle_comment_type[questionId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                </div>
+                <div style="display: none" class="form-group">
+                    <input id="article_content" value="{{ app.user.id }}" name="quiz_bundle_comment_type[authorId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                </div>
+                {{ form_row(form._token) }}
                 <div class="form-group">
                     <button class="btn btn-default">Add</button>
                 </div>
@@ -40,7 +47,30 @@
     </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <a href={{ path('question',{id:id}) }} hidden id="ok" class="close">OK</a>
+            <div style="display: none" id="afterQuestionResult">
+                <div class="close"><a href={{ path('question',{id:id}) }}>Next Question</a></div>
+                {% if question.isLiked(app.user) %}
+                    <a class="unlike" href=""><i class="glyphicon glyphicon-thumbs-down"></i>Remove vote</a>
+                {% else %}
+                    <a class="like" href=""> <i class="glyphicon glyphicon-thumbs-up"></i>Vote up</a>
+                {% endif %}
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <input id="comment_content" name="quiz_bundle_comment_type[content]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    <div style="display: none" class="form-group">
+                        <input id="comment_questionId" value="{{ question.id }}" name="quiz_bundle_comment_type[questionId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    <div style="display: none" class="form-group">
+                        <input id="comment_authorId" value="{{ app.user.id }}" name="quiz_bundle_comment_type[authorId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="form-group">
+                        <button id="addComment" class="btn btn-default">Add</button>
+                    </div>
+                </div>
+            </div>
+
             <div id="answer">We are checking your answer...
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
@@ -50,6 +80,7 @@
         </div>
     <script>
         $(".like").on('click', function(){
+            $(this).hide();
             $.ajax({
                 url:'{{ (path('likeQuestion',{'id':question.id})) }}',
                 type: "POST",
@@ -57,12 +88,13 @@
                 async: true,
                 success: function (data)
                 {
-                    console.log(data)
+
                 }
             });
             return false;
         });
         $(".unlike").on('click', function(){
+            $(this).hide();
             $.ajax({
                 url:'{{ (path('unlikeQuestion',{'id':question.id})) }}',
                 type: "POST",
@@ -87,7 +119,7 @@
                 data: data,
                 success:function (ans) {
                     $("#answer").text(ans);
-                    $("#ok").css("display","block")
+                    $("#afterQuestionResult").css("display","block")
                 }
             })
         });
@@ -95,6 +127,21 @@
         span.on("click", function() {
             $('#myModal').css("display", "none");
             $(".loader").css("display", "block");
+        })
+        $("#addComment").on("click", function () {
+            $(this).parent().parent().hide();
+            let data = {comment : $("#comment_content").val(),questionId : $("#comment_questionId").val(),authorId : $("#comment_authorId").val(),};
+            let modal = $('#myModal');
+            modal.css("display", "block");
+            $.ajax({
+                method: "POST",
+                url: '{{ (path('addCommentAjax')) }}',
+                cache: false,
+                data: data,
+                success:function (ans) {
+                    $("#comment_content").val("");
+                }
+            })
         });
     </script>
 {% endblock %}

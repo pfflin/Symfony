@@ -2,6 +2,10 @@
 
 namespace QuizBundle\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
+use QuizBundle\Entity\Role;
+
 /**
  * RoleRepository
  *
@@ -10,4 +14,8 @@ namespace QuizBundle\Repository;
  */
 class RoleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new Mapping\ClassMetadata(Role::class));
+    }
 }

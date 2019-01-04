@@ -50,20 +50,27 @@
                         {% endif %}
                             <div>Total votes:{{ comment.users|length }}</div>
                     </li>
+                {% else %}
+                    <li>No comment's on this question yet</li>
                 {% endfor %}
             </ul>
-            <form class="form-inline" action="{{ path('create_comment')}}" method="POST" role="form">
-                <div class="form-group">
-                    <input id="article_content" name="quiz_bundle_comment_type[content]" class="form-control" type="text" placeholder="Let us know what you think" />
-                </div>
-                <div style="display: none" class="form-group">
-                    <input id="article_content" value="{{ question.id }}" name="quiz_bundle_comment_type[questionId]" class="form-control" type="text" placeholder="Let us know what you think" />
-                </div>
-                {{ form_row(form._token) }}
-                <div class="form-group">
-                    <button class="btn btn-default">Add</button>
-                </div>
-            </form>
+            <div class="actionBox">
+                <form class="form-inline" action="{{ path('getOne',{'id':question.id})}}" method="POST" role="form">
+                    <div class="form-group">
+                        <input id="article_content" name="quiz_bundle_comment_type[content]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    <div style="display: none" class="form-group">
+                        <input id="article_content" value="{{ question.id }}" name="quiz_bundle_comment_type[questionId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    <div style="display: none" class="form-group">
+                        <input id="article_content" value="{{ app.user.id }}" name="quiz_bundle_comment_type[authorId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="form-group">
+                        <button class="btn btn-default">Add</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>

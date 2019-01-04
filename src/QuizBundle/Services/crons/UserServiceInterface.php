@@ -9,7 +9,12 @@
 namespace QuizBundle\Services\crons;
 
 
+use QuizBundle\Entity\User;
+use Symfony\Component\Form\FormInterface;
+
 interface UserServiceInterface
 {
     public function getRating();
+    public function registerUser(FormInterface $form,User $user);
+    public function ranking();
 }

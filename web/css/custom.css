@@ -26,6 +26,9 @@
 
 /* The Close Button */
 .close {
+    margin-top: 4vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
     margin-left: auto;
     margin-right: auto;
     width: 30%;
@@ -33,7 +36,7 @@
     text-align: center;
     cursor: pointer;
     border-radius: 0.25rem;
-    background-color: lightgray;
+    background-color: #07261a;
 }
 
 .close:hover,

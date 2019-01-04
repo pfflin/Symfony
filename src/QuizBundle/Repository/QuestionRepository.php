@@ -3,6 +3,8 @@
 namespace QuizBundle\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
 use PDO;
 use QuizBundle\Entity\Question;
 
@@ -14,6 +16,10 @@ use QuizBundle\Entity\Question;
  */
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new Mapping\ClassMetadata(Question::class));
+    }
     public function getRandom(Connection $connection, $num){
         $num = intval($num);
         $stm = $connection->prepare("SELECT id FROM questions ORDER BY rand() LIMIT :num");

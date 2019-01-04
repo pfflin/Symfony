@@ -9,6 +9,7 @@ use QuizBundle\Entity\Text;
 use QuizBundle\Entity\User;
 use QuizBundle\Form\CommentType;
 use QuizBundle\Form\QuestionType;
+use QuizBundle\Services\CommentServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,12 @@ class QuestionController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
+    private $commentService;
+    public function __construct(CommentServiceInterface $commentService)
+    {
+        $this->commentService=$commentService;
+    }
+
     public function createQuestion(Request $request)
     {
         $question = new Question();
@@ -63,17 +70,24 @@ class QuestionController extends Controller
 
     /**
      * @param $id
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @Route("/question/{id}",name="question", requirements={"id"="\d+"})
      */
-    public function getQuestionsAction($id){
+    public function getQuestionsAction($id, Request $request){
         $mode =  $this->get('session')->get('mode');
         //Check if user want's to skip questions or return to previous question
         if ($this->get('session')->get('page') != $id ){
-            return $this->redirect("/start");
+            return $this->redirectToRoute("homepage");
         }
         if ($id > $mode){
             return $this->redirectToRoute("result");
+        }
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class,$comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->commentService->addComment($comment);
         }
         $arr =  json_decode($this->get('session')->get('arr'));
         $questionId = $arr[$id-1];
@@ -89,7 +103,7 @@ class QuestionController extends Controller
                return new Response("Sorry, that was not the right answer", 200, array('Content-Type' => 'text/html'));
            }
         }
-        return $this->render("question/view.html.twig",['question'=>$question,'id'=>$id+1]);
+        return $this->render("question/view.html.twig",['question'=>$question,'id'=>$id+1,'form'=>$form->createView()]);
     }
     /**
      * @return Response
@@ -126,9 +140,10 @@ class QuestionController extends Controller
     /**
      * @Route("/view/{id}", name="getOne", requirements={"id"="\d+"})
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function viewSingleQuestion($id){
+    public function viewSingleQuestion($id,Request $request){
         /**
          * @var Question $question
          */
@@ -141,6 +156,10 @@ class QuestionController extends Controller
         }
         $comment = new Comment();
         $form = $this->createForm(CommentType::class,$comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->commentService->addComment($comment);
+        }
         return $this->render('question/singleQuestion.html.twig',['question'=>$question, 'form'=> $form->createView()]);
     }
     /**

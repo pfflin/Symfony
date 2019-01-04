@@ -135,7 +135,6 @@ class User implements UserInterface
     {
         return $this->rankFromQuiz;
     }
-
     /**
      * @param int $rankFromQuiz
      */
@@ -143,10 +142,10 @@ class User implements UserInterface
     {
         $this->rankFromQuiz = $rankFromQuiz;
     }
-    public function setRankFromQuestions(){
+    private function setRankFromQuestions(){
         $this->rankFromQuestions = $this->questions->count();
     }
-    public function setRankFromLikes(){
+    private function setRankFromLikes(){
         $this->rankFromLikes=0;
         $closure = function($key, $element){
             $this->rankFromLikes += floor($element->getUsers()->count()/5);

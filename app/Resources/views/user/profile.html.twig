@@ -23,34 +23,13 @@
                     </footer>
                 </article>
             </div>
+        {% else %}
+            <h3>You haven't created any questions yet</h3>
         {% endfor %}
     </ul>
-    <a href="{{ path('user_likes') }}">Questions you liked</a>
 
-    <a href="{{ path('user_commented') }}">Questions you have commented on</a>
+    <div class="row"><h2><a href="{{ path('user_likes') }}">Questions you liked</a></h2></div>
 
-    <div class="row">
-    <h2>Your Comments</h2>
-    </div>
-    <ul>
-        {% for comment in user.comments %}
-            <div class="col-md-6">
-                <article>
-                    <header>
-                        <h6>{{ comment.content }}</h6>
-                    </header>
-                    <small class="author">
-                        {{ comment.question.summary }}
-                    </small>
-                    <footer>
-                        <div class="pull-right">
-                            <a class="btn btn-default btn-xs"
-                               href="{{ path('getOne',{'id': comment.questionId})}}">See the question&raquo;</a>
-                        </div>
-                    </footer>
-                </article>
-            </div>
+    <div class="row"><h2><a href="{{ path('user_commented') }}">Questions you have commented on</a></h2></div>
 
-        {% endfor %}
-    </ul>
 {% endblock %}

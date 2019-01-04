@@ -14,7 +14,8 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content',TextType::class)
-            ->add('questionId', IntegerType::class);
+            ->add('questionId', IntegerType::class)
+            ->add('authorId', IntegerType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

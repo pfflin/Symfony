@@ -2,6 +2,11 @@
 
 namespace QuizBundle\Repository;
 
+
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
+use QuizBundle\Entity\Comment;
+
 /**
  * CommentRepository
  *
@@ -10,4 +15,16 @@ namespace QuizBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new Mapping\ClassMetadata(Comment::class));
+    }
+    public function saveComment(Comment $comment){
+        $this->_em->persist($comment);
+        $this->_em->flush($comment);
+    }
+    public function removeComment(Comment $comment){
+        $this->_em->remove($comment);
+        $this->_em->flush();
+    }
 }

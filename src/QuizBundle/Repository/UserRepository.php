@@ -2,7 +2,7 @@
 
 namespace QuizBundle\Repository;
 
-use Doctrine\ORM\EntityManager;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping;
 use QuizBundle\Entity\User;
@@ -31,6 +31,12 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     }
     public function getAll(){
        return $this->findAll();
-
+    }
+    public function saveUser(User $user){
+       $this->_em->persist($user);
+        $this->_em->flush();
+    }
+    public function getUsersOrderedByTotalRank(){
+       return $this->findBy(array(),array('totalRank' => 'DESC'));
     }
 }
