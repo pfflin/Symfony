@@ -52,4 +52,15 @@ class UserService implements UserServiceInterface
     {
           return $this->userRepository->getUsersOrderedByTotalRank();
     }
+    public function updateUsersRanks()
+    {
+        /** @var User[] $users */
+    $users =  $this->userRepository->findAll();
+    foreach ($users as $user){
+        $user->setTotalRank($user->getRankFromQuiz());
+        $this->userRepository->persistUser($user);
+    }
+    $this->userRepository->flushAll();
+    return true;
+    }
 }

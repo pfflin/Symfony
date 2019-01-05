@@ -5,6 +5,7 @@ namespace QuizBundle\Controller;
 use QuizBundle\Entity\Comment;
 use QuizBundle\Entity\Question;
 use QuizBundle\Entity\User;
+use QuizBundle\Services\LikesServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LikesController extends Controller
 {
+    private $likesService;
+    public function __construct(LikesServiceInterface $likesService)
+    {
+        $this->likesService = $likesService;
+    }
+
     /**
      * @Route("/likeQuestion{id}", name="likeQuestion",requirements={"id"="\d+"})
      * @param $id
@@ -19,27 +26,10 @@ class LikesController extends Controller
      */
     public function addLikeToQuestionAjax($id)
     {
-        /**
-         * @var Question $question
-         */
-        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        if (!$question->getAuthorId() == $user->getId()){
-            return new Response("You can't vote for your own questions", 200, array('Content-Type' => 'text/html'));
-        }
-        $user->setLikes($question);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        try{
-            $em->flush();
+        if ($this->likesService->addLikeQuestion($id)){
             return new Response("Thank you for your vote !", 200, array('Content-Type' => 'text/html'));
-        }catch (\Exception $exception){
-
-            return new Response("You have already voted for this question.", 200, array('Content-Type' => 'text/html'));
         }
+        return new Response("You can't vote for your own questions", 200, array('Content-Type' => 'text/html'));
     }
     /**
      * @Route("/unlikeQuestion{id}", name="unlikeQuestion",requirements={"id"="\d+"})
@@ -48,23 +38,8 @@ class LikesController extends Controller
      */
     public function removeLikeFromQuestionAjax($id)
     {
-        /**
-         * @var Question $question
-         */
-        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        $user->removeLikes($question);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        try{
-            $em->flush();
+        $this->likesService->removeLikeQuestion($id);
             return new Response("Thank you for your vote !", 200, array('Content-Type' => 'text/html'));
-        }catch (\Exception $exception){
-            return new Response("You have already voted for this question.", 200, array('Content-Type' => 'text/html'));
-        }
     }
     /**
      * @Route("/likeQuestionAndRedirect/{id}", name="likeQuestionAndRedirect",requirements={"id"="\d+"})
@@ -73,21 +48,7 @@ class LikesController extends Controller
      */
     public function addLikeToQuestion($id)
     {
-        /**
-         * @var Question $question
-         */
-        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        if ($question->getAuthorId() == $user->getId()){
-            return new Response("You can't vote for your own questions", 200, array('Content-Type' => 'text/html'));
-        }
-        $user->setLikes($question);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-            $em->flush();
+        $this->likesService->addLikeQuestion($id);
             return $this->redirectToRoute("getOne",array('id'=>$id));
     }
     /**
@@ -97,18 +58,7 @@ class LikesController extends Controller
      */
     public function removeLikeFromQuestion($id)
     {
-        /**
-         * @var Question $question
-         */
-        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        $user->removeLikes($question);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-            $em->flush();
+        $this->likesService->removeLikeQuestion($id);
         return $this->redirectToRoute("getOne",array('id'=>$id));
     }
     /**
@@ -118,22 +68,11 @@ class LikesController extends Controller
      */
     public function addLikeToComment($id)
     {
-        /**
-         * @var Comment $comment
-         */
-        $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id);
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        if (!$comment->getAuthorId() == $user->getId()){
+        $questionId = $this->likesService->addLikeComment($id);
+        if ($questionId == 0){
             return new Response("You can't vote for your own questions", 200, array('Content-Type' => 'text/html'));
         }
-        $user->setLikedComments($comment);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
-        return $this->redirectToRoute("getOne",array('id'=>$comment->getQuestionId()));
+        return $this->redirectToRoute("getOne",array('id'=>$questionId));
     }
     /**
      * @Route("/unlikeCommentAndRedirect/{id}", name="unlikeCommentAndRedirect",requirements={"id"="\d+"})
@@ -142,18 +81,10 @@ class LikesController extends Controller
      */
     public function removeLikeFromComment($id)
     {
-        /**
-         * @var Comment $comment
-         */
-        $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id);
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        $user->removeLikedComment($comment);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
-        return $this->redirectToRoute("getOne",array('id'=>$comment->getQuestionId()));
+        $questionId = $this->likesService->removeLikeComment($id);
+        if ($questionId == 0){
+            return new Response("You can't remove a vote which you haven't committed", 200, array('Content-Type' => 'text/html'));
+        }
+        return $this->redirectToRoute("getOne",array('id'=>$questionId));
     }
 }

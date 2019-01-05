@@ -185,4 +185,21 @@ class QuestionController extends Controller
         }
         return $this->render('question/edit.html.twig',['question'=>$question,'form'=>$form->createView()]);
     }
+
+    /**
+     * @Route("/delete/{id}", name="delete" ,requirements={"id"="\d+"})
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteQuestion($id){
+        $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
+        $currentUser = $this->getUser();
+        if ($question === null || !$currentUser->isAuthor($question->getAuthorId()) && !$currentUser->isAdmin()){
+            return $this->redirectToRoute("homepage");
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($question);
+        $em->flush();
+        return $this->redirectToRoute("homepage");
+    }
 }

@@ -7,6 +7,9 @@
         <a href="{{ path('start',{'num':'10'}) }}" type="button" class="btn btn-primary btn-lg btn-block">10 Questions</a>
         <a href="{{ path('start',{'num':'15'}) }}" type="button" class="btn btn-primary btn-lg btn-block">15 Questions</a>
         <a href="{{ path('allUsers') }}" type="button" class="btn btn-success btn-lg btn-block">What's my Rank ?</a>
+        {% if app.user.isAdmin() %}
+            <a href="{{ path('adminAll') }}" type="button" class="btn btn-primary btn-lg btn-block">All Questions</a>
+        {% endif %}
     {% else %}
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
@@ -16,5 +19,4 @@
             </div>
         </div>
     {% endif %}
-
 {% endblock %}

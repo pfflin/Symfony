@@ -5,6 +5,7 @@ namespace QuizBundle\Controller;
 use QuizBundle\Entity\User;
 use QuizBundle\Form\UserType;
 use QuizBundle\Services\crons\UserServiceInterface;
+use QuizBundle\Services\QuestionServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,9 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends Controller
 {
     private $userService;
-    public function __construct(UserServiceInterface $userService)
+    private $questionService;
+    public function __construct(UserServiceInterface $userService, QuestionServiceInterface $questionService)
     {
         $this->userService=$userService;
+        $this->questionService=$questionService;
     }
 
     /**
@@ -61,20 +64,16 @@ class UserController extends Controller
      */
     public function rating(){return $this->render("user/allUsers.html.twig",['users'=>$this->userService->ranking()]);
     }
+    public function checkTotalRank(){
+        $this->userService->updateUsersRanks();
+        return "insideController";
+    }
+
     /**
-     * @Route("/ranking")
-     * @param UserServiceInterface $userService
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/admin/all", name="adminAll")
      */
-    public function ranking(UserServiceInterface $userService){
-        /** @var User[] $users */
-       $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-       $em = $this->getDoctrine()->getManager();
-       foreach ($users as $user){
-           $user->setTotalRank($user->getRankFromQuiz());
-           $em->persist($user);
-       }
-        $em->flush();
-       return $this->redirectToRoute("homepage");
+    public function getAllQuestions(){
+       $questions = $this->questionService->getAllQuestions();
+        return $this->render("user/allQuestions.html.twig",['questions'=>$questions]);
     }
 }

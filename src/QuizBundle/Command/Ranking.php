@@ -35,8 +35,7 @@ class Ranking extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->userController->test();
-       $output->writeln("cmooon");
+       $output->writeln($this->userController->checkTotalRank());
     }
 
     protected function interact(InputInterface $input, OutputInterface $output)

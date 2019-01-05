@@ -39,4 +39,10 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function getUsersOrderedByTotalRank(){
        return $this->findBy(array(),array('totalRank' => 'DESC'));
     }
+    public function persistUser(User $user){
+        $this->_em->persist($user);
+    }
+    public function flushAll(){
+        $this->_em->flush();
+    }
 }
