@@ -4,6 +4,9 @@
     {% for msg in app.session.flashBag.get('info') %}
         <div class="alert alert-warning">{{ msg }}</div>
     {% endfor %}
+    {% for msg in app.session.flashBag.get('question') %}
+        <a href="{{ path('create_question') }}">Create Question</a>  <div class="alert alert-warning">{{ msg }}</div>
+    {% endfor %}
     <a href="{{ path('homepage') }}">Back to the main page</a>
 {% endblock %}
 

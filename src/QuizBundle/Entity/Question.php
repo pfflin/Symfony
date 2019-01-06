@@ -67,7 +67,7 @@ class Question
     private $authorId;
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="question")
+     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="question", cascade={"remove"})
      */
     private $comments;
 

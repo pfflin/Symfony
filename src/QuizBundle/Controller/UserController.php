@@ -66,7 +66,7 @@ class UserController extends Controller
     }
     public function checkTotalRank(){
         $this->userService->updateUsersRanks();
-        return "insideController";
+        return "Users ranking updated";
     }
 
     /**

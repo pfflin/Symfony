@@ -56,13 +56,13 @@ class User implements UserInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Question", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Question", mappedBy="author", cascade={"remove"})
      */
     private $questions;
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="author")
+     * @ORM\OneToMany(targetEntity="QuizBundle\Entity\Comment",mappedBy="author", cascade={"remove"})
      */
     private $comments;
 

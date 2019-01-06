@@ -48,7 +48,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <div style="display: none" id="afterQuestionResult">
-                <div class="close"><a href={{ path('question',{id:id}) }}>Next Question</a></div>
+                <a href={{ path('question',{id:id}) }}><div class="close">Next Question</div></a>
                 {% if question.isLiked(app.user) %}
                     <a class="unlike" href=""><i class="glyphicon glyphicon-thumbs-down"></i>Remove vote</a>
                 {% else %}

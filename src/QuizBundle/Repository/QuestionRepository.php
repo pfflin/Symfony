@@ -27,4 +27,12 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
         $stm->execute();
            return $stm->fetchAll(PDO::FETCH_COLUMN);
     }
+    public function saveQuestion(Question $question){
+        $this->_em->persist($question);
+        $this->_em->flush();
+    }
+    public function deleteQuestion(Question $question){
+        $this->_em->remove($question);
+        $this->_em->flush();
+    }
 }
