@@ -48,7 +48,6 @@ class QuestionService implements QuestionServiceInterface
                     $question->setAuthor($this->security->getUser());
                     $this->questionRepository->saveQuestion($question);
                     $this->container->get('session')->set("addQuestion", "false");
-                    $this->session->getFlashBag()->add("info", "Thank you for your question");
                     return true;
                 }
                 $this->session->getFlashBag()->add("info", "The correct answer must be exactly the same as one of the answers");
