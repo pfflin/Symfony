@@ -102,7 +102,7 @@ class User implements UserInterface
      *
      * @ORM\Column(name="rank_from_quiz", type="integer", nullable=true, options={"default" : 0})
      */
-    private $rankFromQuiz;
+    private $rankFromQuiz = 0;
     private $rankFromQuestions;
     private $rankFromLikes;
     /**
@@ -110,7 +110,7 @@ class User implements UserInterface
      *
      * @ORM\Column(name="total_rank", type="integer", nullable=true, options={"default" : 0})
      */
-    private $totalRank;
+    private $totalRank =0;
     public function __construct()
     {
         $this->questions =new ArrayCollection();
