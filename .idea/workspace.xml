@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a029e9b-50e4-4701-8fee-1e60979966d2" name="Default Changelist" comment="" />
+    <list default="true" id="4a029e9b-50e4-4701-8fee-1e60979966d2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +110,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profile.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="314">
@@ -118,6 +120,27 @@
                 <element signature="e#702#709#0#HTML" expanded="true" />
                 <element signature="e#857#864#0#HTML" expanded="true" />
                 <element signature="e#1015#1022#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allQuestions.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="21" selection-end-column="96" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -192,7 +215,6 @@
         <option value="$PROJECT_DIR$/web/js/Events.js" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Entity/Text.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Entity/Comment.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/user/register.html.twig" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Form/UserType.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" />
@@ -240,6 +262,7 @@
         <option value="$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Controller/QuestionController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/user/profile.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" />
       </list>
     </option>
   </component>
@@ -467,7 +490,7 @@
       <workItem from="1546853891021" duration="10430000" />
       <workItem from="1546937339768" duration="451000" />
       <workItem from="1546940572437" duration="924000" />
-      <workItem from="1547025493869" duration="8219000" />
+      <workItem from="1547025493869" duration="8472000" />
     </task>
     <servers />
   </component>
@@ -477,7 +500,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266368000" />
+    <option name="totallyTimeSpent" value="266621000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -490,7 +513,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33661118" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -538,16 +560,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26639">
-          <caret line="1583" column="20" selection-start-line="1583" selection-start-column="20" selection-end-line="1583" selection-end-column="20" />
-          <folding>
-            <element signature="e#1015#1066#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/register.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -684,13 +696,6 @@
           <folding>
             <element signature="e#42#82#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allQuestions.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="21" selection-end-column="96" />
         </state>
       </provider>
     </entry>
@@ -1002,6 +1007,23 @@
             <element signature="e#702#709#0#HTML" expanded="true" />
             <element signature="e#857#864#0#HTML" expanded="true" />
             <element signature="e#1015#1022#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allQuestions.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="21" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
