@@ -113,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profile.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="34" column="110" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="34" selection-end-column="110" />
+            <state relative-caret-position="43">
+              <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="48" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
                 <element signature="e#702#709#0#HTML" expanded="true" />
@@ -128,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allQuestions.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="21" selection-end-column="96" />
+            <state relative-caret-position="153">
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -137,8 +137,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+            <state relative-caret-position="323">
+              <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
@@ -490,7 +490,7 @@
       <workItem from="1546853891021" duration="10430000" />
       <workItem from="1546937339768" duration="451000" />
       <workItem from="1546940572437" duration="924000" />
-      <workItem from="1547025493869" duration="8472000" />
+      <workItem from="1547025493869" duration="8884000" />
     </task>
     <servers />
   </component>
@@ -500,7 +500,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266621000" />
+    <option name="totallyTimeSpent" value="267033000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -513,6 +513,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33661118" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1000,8 +1001,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profile.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="34" column="110" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="34" selection-end-column="110" />
+        <state relative-caret-position="43">
+          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="48" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
             <element signature="e#702#709#0#HTML" expanded="true" />
@@ -1013,15 +1014,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allQuestions.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="21" selection-end-column="96" />
+        <state relative-caret-position="153">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+        <state relative-caret-position="323">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
