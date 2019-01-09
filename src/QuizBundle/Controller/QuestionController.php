@@ -118,7 +118,7 @@ class QuestionController extends Controller
         if ($form->isSubmitted() && $form->isValid()){
             $this->commentService->addComment($comment);
         }
-        return $this->render('question/singleQuestion.html.twig',['question'=>$question, 'form'=> $form->createView(), 'comments'=>$this->commentService->getQuestionComments($id)]);
+        return $this->render('question/singleQuestion.html.twig',['question'=>$question, 'form'=> $form->createView()]);
     }
     /**
      * @Route("/edit/{id}", name="edit",requirements={"id"="\d+"})
