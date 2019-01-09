@@ -109,16 +109,16 @@ class QuestionController extends Controller
      */
     public function viewSingleQuestion($id,Request $request){
        $question = $this->questionService->getQuestion($id);
-        if ($this->questionService->permitToViewQuestion($question)){
-            return $this->redirectToRoute("homepage");
-        }
+       // if ($this->questionService->permitToViewQuestion($question)){
+         //   return $this->redirectToRoute("homepage");
+       // }
         $comment = new Comment();
         $form = $this->createForm(CommentType::class,$comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $this->commentService->addComment($comment);
         }
-        return $this->render('question/singleQuestion.html.twig',['question'=>$question, 'form'=> $form->createView()]);
+        return $this->render('question/singleQuestion.html.twig',['question'=>$question]);
     }
     /**
      * @Route("/edit/{id}", name="edit",requirements={"id"="\d+"})
