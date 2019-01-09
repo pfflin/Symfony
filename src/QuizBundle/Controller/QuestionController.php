@@ -109,7 +109,7 @@ class QuestionController extends Controller
      */
     public function viewSingleQuestion($id,Request $request){
        $question = $this->questionService->getQuestion($id);
-        if ($this->questionService->permitToViewQuestion($question)){
+        if ($this->questionService->permitToEditQuestion($question)){
             return $this->redirectToRoute("homepage");
         }
         $comment = new Comment();
