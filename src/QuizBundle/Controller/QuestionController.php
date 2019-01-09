@@ -136,7 +136,6 @@ class QuestionController extends Controller
         $this->questionService->editQuestion($form,$question);
         return $this->render('question/edit.html.twig',['question'=>$question,'form'=>$form->createView()]);
     }
-
     /**
      * @Route("/delete/{id}", name="delete" ,requirements={"id"="\d+"})
      * @param $id
