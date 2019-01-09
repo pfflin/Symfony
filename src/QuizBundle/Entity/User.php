@@ -268,9 +268,8 @@ class User implements UserInterface
      */
     public function getQuestions()
     {
-        return $this->questions->toArray();
+        return $this->questions->getValues();
     }
-
     /**
      * @param ArrayCollection $question
      * @return User
