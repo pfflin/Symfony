@@ -33,7 +33,7 @@
         </div>
         <div class="actionBox">
             <ul class="commentList">
-                {% for comment in question.comments %}
+                {% for comment in comments %}
                     <li>
                         <p class="author">{{ comment.author.fullName }}</p>
                         <div class="commentText">

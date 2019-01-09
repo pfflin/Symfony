@@ -48,4 +48,8 @@ class CommentService implements CommentServiceInterface
         $this->commentRepository->removeComment($comment);
         return $comment->getQuestionId();
     }
+    public function getQuestionComments($id)
+    {
+     return $this->commentRepository->findBy(array('questionId'=>$id));
+    }
 }

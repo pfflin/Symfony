@@ -15,4 +15,5 @@ interface CommentServiceInterface
 {
     public function addComment(Comment $comment);
     public function removeComment($id);
+    public function getQuestionComments($id);
 }
