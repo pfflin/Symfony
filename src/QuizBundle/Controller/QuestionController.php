@@ -109,9 +109,9 @@ class QuestionController extends Controller
      */
     public function viewSingleQuestion($id,Request $request){
        $question = $this->questionService->getQuestion($id);
-       // if ($this->questionService->permitToViewQuestion($question)){
-         //   return $this->redirectToRoute("homepage");
-       // }
+        if ($this->questionService->permitToViewQuestion($question)){
+            return $this->redirectToRoute("homepage");
+        }
         $comment = new Comment();
         $form = $this->createForm(CommentType::class,$comment);
         $form->handleRequest($request);
