@@ -15,11 +15,4 @@
         </div>
     </div>
 </div>
-    <div>{{ app.user.fullName }}</div>
-    {% for question in app.user.questions %}
-
-    {% endfor %}
-    <div class="row"><h2><a href="{{ path('user_likes') }}">Questions you liked</a></h2></div>
-
-    <div class="row"><h2><a href="{{ path('user_commented') }}">Questions you have commented on</a></h2></div>
 {% endblock %}

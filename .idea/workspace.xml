@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a029e9b-50e4-4701-8fee-1e60979966d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/question/singleQuestion.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/question/singleQuestion.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuizBundle/Controller/QuestionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuizBundle/Controller/QuestionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuizBundle/Services/CommentService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuizBundle/Services/CommentService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuizBundle/Services/CommentServiceInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuizBundle/Services/CommentServiceInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/src/QuizBundle/Controller/QuestionController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="291">
-              <caret line="120" column="35" lean-forward="true" selection-start-line="120" selection-start-column="35" selection-end-line="120" selection-end-column="35" />
+              <caret line="120" column="35" selection-start-line="120" selection-start-column="35" selection-end-line="120" selection-end-column="35" />
               <folding>
                 <element signature="e#41#70#0#PHP" expanded="true" />
                 <element signature="e#1032#1486#0#PHP" />
@@ -120,7 +117,7 @@
         <entry file="file://$PROJECT_DIR$/src/QuizBundle/Services/CommentService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="343">
-              <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+              <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
               <folding>
                 <element signature="e#122#152#0#PHP" expanded="true" />
               </folding>
@@ -131,8 +128,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/question/singleQuestion.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="35" column="34" lean-forward="true" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+            <state relative-caret-position="274">
+              <caret line="44" column="34" lean-forward="true" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -148,15 +145,6 @@
                 <element signature="e#857#864#0#HTML" expanded="true" />
                 <element signature="e#1015#1022#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allQuestions.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -186,7 +174,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>name</find>
       <find>47</find>
       <find>authorId</find>
       <find>gly</find>
@@ -216,6 +203,7 @@
       <find>sens</find>
       <find>getQu</find>
       <find>getQuest</find>
+      <find>for</find>
     </findStrings>
     <replaceStrings>
       <replace>QuizBundle</replace>
@@ -268,7 +256,6 @@
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Services/crons/UserService.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Services/crons/UserServiceInterface.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/user/profile.html.twig" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php" />
@@ -278,6 +265,7 @@
         <option value="$PROJECT_DIR$/src/QuizBundle/Services/CommentService.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Controller/QuestionController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/question/singleQuestion.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig" />
       </list>
     </option>
   </component>
@@ -505,7 +493,7 @@
       <workItem from="1546853891021" duration="10430000" />
       <workItem from="1546937339768" duration="451000" />
       <workItem from="1546940572437" duration="924000" />
-      <workItem from="1547025493869" duration="12728000" />
+      <workItem from="1547025493869" duration="13070000" />
     </task>
     <servers />
   </component>
@@ -515,7 +503,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="270877000" />
+    <option name="totallyTimeSpent" value="271219000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -695,13 +683,6 @@
           <folding>
             <element signature="e#42#82#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/question/result.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="117" selection-start-line="7" selection-start-column="117" selection-end-line="7" selection-end-column="117" />
         </state>
       </provider>
     </entry>
@@ -896,16 +877,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allQuestions.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1002,7 +973,7 @@
     <entry file="file://$PROJECT_DIR$/src/QuizBundle/Services/CommentService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
-          <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
           <folding>
             <element signature="e#122#152#0#PHP" expanded="true" />
           </folding>
@@ -1019,7 +990,7 @@
     <entry file="file://$PROJECT_DIR$/src/QuizBundle/Controller/QuestionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
-          <caret line="120" column="35" lean-forward="true" selection-start-line="120" selection-start-column="35" selection-end-line="120" selection-end-column="35" />
+          <caret line="120" column="35" selection-start-line="120" selection-start-column="35" selection-end-line="120" selection-end-column="35" />
           <folding>
             <element signature="e#41#70#0#PHP" expanded="true" />
             <element signature="e#1032#1486#0#PHP" />
@@ -1035,10 +1006,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/question/result.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="117" selection-start-line="7" selection-start-column="117" selection-end-line="7" selection-end-column="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/allUsers.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/question/singleQuestion.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="35" column="34" lean-forward="true" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+        <state relative-caret-position="274">
+          <caret line="44" column="34" lean-forward="true" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
         </state>
       </provider>
     </entry>
