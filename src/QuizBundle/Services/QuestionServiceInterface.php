@@ -32,5 +32,5 @@ interface QuestionServiceInterface
     public function checkIfCorrectAnswerExists(Question $question);
     public function editQuestion(Form$form,Question$question);
     public function deleteQuestion(Question $question);
-    public function getUsersQuestions($id);
+    public function getUsersQuestions();
 }

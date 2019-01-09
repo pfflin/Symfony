@@ -163,7 +163,8 @@ class QuestionService implements QuestionServiceInterface
     {
      $this->questionRepository->deleteQuestion($question);
     }
-    public function getUsersQuestions($id){
+    public function getUsersQuestions(){
+        $id = $this->security->getUser()->getId();
        return $this->questionRepository->findBy(array('authorId'=>$id));
     }
 }
