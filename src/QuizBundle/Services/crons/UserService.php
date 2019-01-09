@@ -14,17 +14,20 @@ use QuizBundle\Repository\RoleRepository;
 use QuizBundle\Repository\UserRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Security;
 
 class UserService implements UserServiceInterface
 {
     private $userRepository;
     private $container;
     private $roleRepository;
-    public function __construct(UserRepository $userRepository,ContainerInterface $container,RoleRepository $roleRepository)
+    private $security;
+    public function __construct(UserRepository $userRepository,ContainerInterface $container,RoleRepository $roleRepository,Security $security)
     {
         $this->userRepository=$userRepository;
         $this->container=$container;
         $this->roleRepository=$roleRepository;
+        $this->security=$security;
     }
 
     public function getRating()
@@ -62,5 +65,8 @@ class UserService implements UserServiceInterface
     }
     $this->userRepository->flushAll();
     return true;
+    }
+    public function getCurrentUser(){
+        return $this->security->getUser();
     }
 }

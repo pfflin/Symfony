@@ -45,7 +45,7 @@ class UserController extends Controller
      *
      */
     public function profile(){
-        return $this->render("user/profile.html.twig",['user'=>$this->getUser()]);
+        return $this->render("user/profile.html.twig",['user'=>$this->userService->getCurrentUser()]);
     }
     /**
      * @Route("/profile/liked", name="user_likes")

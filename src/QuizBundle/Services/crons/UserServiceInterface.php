@@ -18,4 +18,5 @@ interface UserServiceInterface
     public function registerUser(FormInterface $form,User $user);
     public function ranking();
     public function updateUsersRanks();
+    public function getCurrentUser();
 }
