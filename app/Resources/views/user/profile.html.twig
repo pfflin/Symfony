@@ -8,13 +8,20 @@
             <div class="col-md-6">
                 <article>
                     <header>
-                        <h2>{{ question.summary }}</h2>
+
                     </header>
                     <small class="author">
-                        {{ question.correct }}
+                        
                     </small>
                     <footer>
-                        
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('getOne',{'id': question.id}) }}">Read more&raquo;</a>
+                            <a class="btn btn-warning btn-xs"
+                               href="{{ path('edit',{'id': question.id}) }}">Edit&raquo;</a>
+                            <a class="btn btn-danger btn-xs"
+                               href="{{ path('delete',{'id': question.id}) }}">Delete&raquo;</a>
+                        </div>
                     </footer>
                 </article>
             </div>
