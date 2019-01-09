@@ -62,7 +62,8 @@ class UserController extends Controller
     /**
      * @Route("/all/users", name="allUsers")
      */
-    public function rating(){return $this->render("user/allUsers.html.twig",['users'=>$this->userService->ranking()]);
+    public function rating(){
+        return $this->render("user/allUsers.html.twig",['users'=>$this->userService->ranking()]);
     }
     public function checkTotalRank(){
         $this->userService->updateUsersRanks();
