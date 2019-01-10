@@ -3,8 +3,11 @@
 namespace QuizBundle\Repository;
 
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Query;
+use PDO;
 use QuizBundle\Entity\User;
 
 /**
@@ -18,6 +21,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct($em, new Mapping\ClassMetadata(User::class));
+
     }
 
     public function getAllUsers()
@@ -45,12 +49,29 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function flushAll(){
         $this->_em->flush();
     }
-    public function getCommentedAndLiked(User $user){
+    public function getLiked(User $user){
         $query = $this->_em->createQueryBuilder();
         $query->select('l.id');
         $query->from('QuizBundle:User','u');
-        $query->innerJoin('u.likes','l','WITH','l.authorId = :authorId');
-        $query->setParameter("authorId",3);
+        $query->innerJoin('u.likes','l');
+        $query->where("u.id = :authorId");
+        $query->setParameter("authorId",$user->getId());
         return $query->getQuery()->getResult();
+    }
+    public function getCommented(User $user){
+        $query = $this->_em->createQueryBuilder();
+        $query->select('c.questionId');
+        $query->from('QuizBundle:User','u');
+        $query->innerJoin('u.comments','c');
+        $query->where("u.id = :authorId");
+        $query->setParameter("authorId",$user->getId());
+        return $query->getQuery()->getResult();
+    }
+    public function getLikedQuestions(User $user,Connection $connection){
+        $userId = $user->getId();
+       $stm = $connection->prepare("SELECT questionId FROM users_questions WHERE userId = 1");
+       $stm->bindParam('idUser',$userId);
+       $stm->execute();
+       return $stm->fetchAll(PDO::FETCH_COLUMN);
     }
 }

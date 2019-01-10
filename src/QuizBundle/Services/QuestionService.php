@@ -28,13 +28,15 @@ class QuestionService implements QuestionServiceInterface
     private $security;
     private $session;
     private $userRepository;
-    public function __construct(UserRepository $userRepository, QuestionRepository $questionRepository,ContainerInterface $container,Security $security,SessionInterface$session)
+    private $connection;
+    public function __construct(Connection $connection,UserRepository $userRepository, QuestionRepository $questionRepository,ContainerInterface $container,Security $security,SessionInterface$session)
     {
         $this->questionRepository=$questionRepository;
         $this->container=$container;
         $this->security=$security;
         $this->session=$session;
         $this->userRepository=$userRepository;
+        $this->connection=$connection;
     }
 
     public function getAllQuestions()
@@ -128,9 +130,17 @@ class QuestionService implements QuestionServiceInterface
         $currentUser = $this->security->getUser();
 
         // if such question does not exist, or if user hasn't liked or comment on it and is not author or admin redirect...
-        if ($question === null || !$currentUser->likedQuestion($question) && !$currentUser->isCommented($question) && !$currentUser->isAdmin() && !$currentUser->isAuthor($question->getAuthorId())){
+        if ($question === null || !$this->checkIfLiked($question,$currentUser) && !$this->checkIfCommented($question,$currentUser) && !$currentUser->isAdmin() && !$currentUser->isAuthor($question->getAuthorId())){
             return true;
         }
+    }
+    private function checkIfCommented(Question $question,User $user){
+         $questionIds = $this->userRepository->getCommented($user);
+        return in_array(Array('questionId' => $question->getId() ),$questionIds);
+    }
+    private function checkIfLiked(Question $question,User $user){
+       $questionIds = $this->userRepository->getLiked($user);
+       return in_array(Array('id' => $question->getId() ),$questionIds);
     }
     public function getQuestion($id)
     {
