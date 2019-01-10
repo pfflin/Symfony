@@ -126,9 +126,9 @@ class QuestionService implements QuestionServiceInterface
     {
         /** @var User $currentUser */
         $currentUser = $this->security->getUser();
-        $theUser = $this->userRepository->find($currentUser->getId());
+
         // if such question does not exist, or if user hasn't liked or comment on it and is not author or admin redirect...
-        if ($question === null || !$theUser->likedQuestion($question) && !$theUser->isCommented($question) && !$theUser->isAdmin() && !$theUser->isAuthor($question->getAuthorId())){
+        if ($question === null || !$currentUser->likedQuestion($question) && !$currentUser->isCommented($question) && !$currentUser->isAdmin() && !$currentUser->isAuthor($question->getAuthorId())){
             return true;
         }
     }

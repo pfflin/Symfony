@@ -45,4 +45,12 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function flushAll(){
         $this->_em->flush();
     }
+    public function getCommentedAndLiked(User $user){
+        $query = $this->_em->createQueryBuilder();
+        $query->select('l.id');
+        $query->from('QuizBundle:User','u');
+        $query->innerJoin('u.likes','l','WITH','l.authorId = :authorId');
+        $query->setParameter("authorId",3);
+        return $query->getQuery()->getResult();
+    }
 }
