@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h1>Hello, {{ app.user.fullName }}</h1>
+    <h2>Your questions</h2>
+    <ul>
+        {% for question in app.user.questions %}
+            <div class="col-md-6">
+                <article>
+                    <header>
+                        <h2>{{ question.summary }}</h2>
+                    </header>
+                    <small class="author">
+                        {{ question.correct }}
+                    </small>
+                    <footer>
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('getOne',{'id': question.id}) }}">Read more&raquo;</a>
+                            <a class="btn btn-warning btn-xs"
+                               href="{{ path('edit',{'id': question.id}) }}">Edit&raquo;</a>
+                            <a class="btn btn-danger btn-xs"
+                               href="{{ path('delete',{'id': question.id}) }}">Delete&raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        {% else %}
+            <h3>You haven't created any questions yet</h3>
+        {% endfor %}
+    </ul>
+
+    <div class="row"><h2><a href="{{ path('user_likes') }}">Questions you liked</a></h2></div>
+
+    <div class="row"><h2><a href="{{ path('user_commented') }}">Questions you have commented on</a></h2></div>
+
+{% endblock %}

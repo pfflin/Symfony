@@ -48,6 +48,13 @@ class UserController extends Controller
         return $this->render("user/profile.html.twig",['questions'=>$this->questionService->getUsersQuestions()]);
     }
     /**
+     * @Route("/profile1", name="user_profile1")
+     *
+     */
+    public function profileNotWorking(){
+        return $this->render("user/profile1.html.twig",['user'=>$this->getUser()]);
+    }
+    /**
      * @Route("/profile/liked", name="user_likes")
      */
     public function likedQuestions(){

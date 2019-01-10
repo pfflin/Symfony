@@ -2,9 +2,7 @@
 
 namespace QuizBundle\Controller;
 
-use QuizBundle\Entity\Comment;
-use QuizBundle\Entity\Question;
-use QuizBundle\Entity\User;
+
 use QuizBundle\Services\LikesServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
