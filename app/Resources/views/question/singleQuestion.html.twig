@@ -11,5 +11,66 @@
         <hr/>
         <p type="button" class="list-group-item list-group-item-action opt">The right answer is: {{ question.correct }}</p>
     </div>
+    {% if not app.user.isAuthor(question.authorId) %}
+        {% if question.isLiked(app.user) %}
+            <a class="unlike" href="{{ path('unlikeQuestionAndRedirect',{'id':question.id}) }}"><i class="glyphicon glyphicon-thumbs-down"></i></a>
+        {% else %}
+            <a class="like" href="{{ path('likeQuestionAndRedirect',{'id':question.id}) }}"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+        {% endif %}
+    {% endif %}
+    <div>Total votes:{{ question.users|length }}</div>
+    {% if app.user.isAuthor(question.authorId) %}
+        <div class="text-center">
+            <a class="btn btn-default btn-lg"
+               href="{{ path('edit',{'id': question.id}) }}">Edit &raquo;</a>
+        </div>
+    {% endif %}
+    <div class="detailBox">
+        <div class="titleBox">
+            <label>Comments</label>
+            <button type="button" class="close" aria-hidden="true">&times;</button>
+        </div>
+        <div class="actionBox">
+            <ul class="commentList">
+                {% for comment in comments %}
+                    <li>
+                        <p class="author">{{ comment.author.fullName }}</p>
+                        <div class="commentText">
+                            <p class="">{{ comment.content }}</p> <span class="date sub-text">on {{ comment.dateAdded|date('Y-m-d') }}</span>
+                        </div>
+                        {%if app.user.isAuthor(comment.authorId)%}
+                            <a href="{{ path('removeComment',{'id':comment.id}) }}">Delete</a>
+                        {% else %}
+                            {% if comment.isLiked(app.user) %}
+                                <a class="unlike" href="{{ path('unlikeCommentAndRedirect',{'id':comment.id}) }}"><i class="glyphicon glyphicon-thumbs-down"></i></a>
+                            {% else %}
+                                <a class="like" href="{{ path('likeCommentAndRedirect',{'id':comment.id}) }}"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                            {% endif %}
+                        {% endif %}
+                        <div>Total votes:{{ comment.users|length }}</div>
+                    </li>
+                {% else %}
+                    <li>No comment's on this question yet</li>
+                {% endfor %}
+            </ul>
+            <div class="actionBox">
+                <form class="form-inline" action="{{ path('getOne',{'id':question.id})}}" method="POST" role="form">
+                    <div class="form-group">
+                        <input id="article_content" name="quiz_bundle_comment_type[content]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    <div style="display: none" class="form-group">
+                        <input id="article_content" value="{{ question.id }}" name="quiz_bundle_comment_type[questionId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    <div style="display: none" class="form-group">
+                        <input id="article_content" value="{{ app.user.id }}" name="quiz_bundle_comment_type[authorId]" class="form-control" type="text" placeholder="Let us know what you think" />
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="form-group">
+                        <button class="btn btn-default">Add</button>
+                    </div>
+                </form>
+            </div>
 
+        </div>
+    </div>
 {% endblock %}
