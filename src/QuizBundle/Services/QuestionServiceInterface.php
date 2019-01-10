@@ -33,4 +33,6 @@ interface QuestionServiceInterface
     public function editQuestion(Form$form,Question$question);
     public function deleteQuestion(Question $question);
     public function getUsersQuestions();
+    public function getUsersLikedQuestions();
+    public function getUsersCommentedQuestions();
 }

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>Hello, {{ user.fullName }}</h1>
+    <h1>Hello, {{ app.user.fullName }}</h1>
     <h2>Questions you have liked</h2>
     <ul>
-        {% for question in user.likes %}
+        {% for question in questions %}
             <div class="col-md-6">
                 <article>
                     <header>
-                        <h2>{{ question.summary }}</h2>
+                        <h2>{{ question.question }}</h2>
                     </header>
                     <small class="author">
                         {{ question.correct }}

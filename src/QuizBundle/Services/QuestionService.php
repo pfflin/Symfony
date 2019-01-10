@@ -178,4 +178,10 @@ class QuestionService implements QuestionServiceInterface
         $id = $this->security->getUser()->getId();
        return $this->questionRepository->findBy(array('authorId'=>$id));
     }
+    public function getUsersLikedQuestions(){
+       return $this->userRepository->getLikedQuestions($this->security->getUser());
+    }
+    public function getUsersCommentedQuestions(){
+        return $this->userRepository->getCommentedQuestions($this->security->getUser());
+    }
 }

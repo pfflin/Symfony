@@ -67,11 +67,25 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter("authorId",$user->getId());
         return $query->getQuery()->getResult();
     }
-    public function getLikedQuestions(User $user,Connection $connection){
-        $userId = $user->getId();
-       $stm = $connection->prepare("SELECT questionId FROM users_questions WHERE userId = 1");
-       $stm->bindParam('idUser',$userId);
-       $stm->execute();
-       return $stm->fetchAll(PDO::FETCH_COLUMN);
+    public function getLikedQuestions(User $user)
+    {
+        $query = $this->_em->createQueryBuilder();
+        $query->select('l.question', 'l.correct', 'l.id');
+        $query->from('QuizBundle:User', 'u');
+        $query->innerJoin('u.likes', 'l');
+        $query->where("u.id = :authorId");
+        $query->setParameter("authorId", $user->getId());
+        return $query->getQuery()->getResult(Query::HYDRATE_OBJECT);
+
+    }
+    public function getCommentedQuestions(User $user){
+        $query = $this->_em->createQueryBuilder();
+        $query->select('q.question','q.correct','q.id');
+        $query->from('QuizBundle:User','u');
+        $query->innerJoin('u.comments','c');
+        $query->innerJoin('c.question', 'q');
+        $query->where("u.id = :authorId");
+        $query->setParameter("authorId",$user->getId());
+        return $query->getQuery()->getResult();
     }
 }
