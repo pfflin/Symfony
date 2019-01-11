@@ -45,7 +45,7 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <div style="display: none" id="afterQuestionResult">
-                <a href={{ path('question',{id:id}) }}><div class="close">Next Question</div></a>
+                <a href={{ path('question',{id:id}) }}><div class="close bg-dark">Next Question</div></a>
                 {% if question.isLiked(app.user) %}
                     <a class="unlike" href=""><i class="glyphicon glyphicon-thumbs-down"></i>Remove vote</a>
                 {% else %}
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div id="answer">We are checking your answer...
+            <div id="answer" class ="text-primary">We are checking your answer...
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
             </div>
@@ -77,7 +77,7 @@
         </div>
     <script>
         $(".like").on('click', function(){
-            $(this).hide();
+            $(".like").hide();
             $.ajax({
                 url:'{{ (path('likeQuestion',{'id':question.id})) }}',
                 type: "POST",
@@ -91,7 +91,7 @@
             return false;
         });
         $(".unlike").on('click', function(){
-            $(this).hide();
+            $(".unlike").hide();
             $.ajax({
                 url:'{{ (path('unlikeQuestion',{'id':question.id})) }}',
                 type: "POST",
