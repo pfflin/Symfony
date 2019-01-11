@@ -71,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/app/Resources/views/question/view.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="128">
-              <caret line="47" column="71" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="71" />
+              <caret line="47" column="80" selection-start-line="47" selection-start-column="80" selection-end-line="47" selection-end-column="80" />
             </state>
           </provider>
         </entry>
@@ -465,7 +465,7 @@
       <workItem from="1546937339768" duration="451000" />
       <workItem from="1546940572437" duration="924000" />
       <workItem from="1547025493869" duration="45883000" />
-      <workItem from="1547230904804" duration="2370000" />
+      <workItem from="1547230904804" duration="2746000" />
     </task>
     <servers />
   </component>
@@ -475,7 +475,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306402000" />
+    <option name="totallyTimeSpent" value="306778000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -487,7 +487,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3419062" />
@@ -965,7 +965,7 @@
     <entry file="file://$PROJECT_DIR$/app/Resources/views/question/view.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
-          <caret line="47" column="71" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="71" />
+          <caret line="47" column="80" selection-start-line="47" selection-start-column="80" selection-end-line="47" selection-end-column="80" />
         </state>
       </provider>
     </entry>
