@@ -170,8 +170,10 @@ class User implements UserInterface
     {
         return $this->rankFromLikes;
     }
-
-    public function setTotalRank($rankFromQuiz)
+    public function setTotalRank($rank){
+        $this->totalRank=$rank;
+    }
+    public function prepareTotalRank($rankFromQuiz)
     {
         $this->setRankFromQuestions();
         $this->setRankFromLikes();

@@ -60,7 +60,7 @@ class UserService implements UserServiceInterface
         /** @var User[] $users */
     $users =  $this->userRepository->findAll();
     foreach ($users as $user){
-        $user->setTotalRank($user->getRankFromQuiz());
+        $user->prepareTotalRank($user->getRankFromQuiz());
         $this->userRepository->persistUser($user);
     }
     $this->userRepository->flushAll();
