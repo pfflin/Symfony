@@ -89,8 +89,7 @@ class QuestionController extends Controller
     public function getResult(){
         $page = $this->questionService->getPage();
         if ($this->questionService->checkIfItsTimeForResult($page)) {
-            /** @var User $user */
-            $user = $this->getUser();
+
             if ($this->questionService->checkIfAllAnswersAreCorrect()) {
                $this->questionService->addScoreToPlayer();
             return $this->render("question/result.html.twig");

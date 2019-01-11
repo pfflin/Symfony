@@ -2,7 +2,6 @@
 
 {% block body %}
     {% if app.user %}
-
         <a href="{{ path('start',{'num':'5'}) }}" type="button" class="btn btn-primary btn-lg btn-block">5 Questions</a>
         <a href="{{ path('start',{'num':'10'}) }}" type="button" class="btn btn-primary btn-lg btn-block">10 Questions</a>
         <a href="{{ path('start',{'num':'15'}) }}" type="button" class="btn btn-primary btn-lg btn-block">15 Questions</a>
@@ -17,9 +16,12 @@
         <p>5 questions game will reward you with 1 point for the total ranking</p>
         <p>10 questions game will reward you with 2 points for the total ranking and the permission to create question yourself</p>
         <p>15 questions game will reward you with 6 points for the total ranking and the permission to create question yourself</p>
+        <p>Once you start a game you can't return to previous listed question or go to next one before you give an answer</p>
         <p>Each 5 likes on your question from other users will reward you with 1 point for the total ranking</p>
         <p>Each 5 likes on your comment for a question from other users will reward you with 1 point for the total ranking</p>
         <p>Total ranking is refreshed every Hour</p>
+        <p>You are allow to view questions you have created, questions you have liked and questions you have commented on or if you have admin role</p>
+        <p>You are allow to edit questions you have created, or if you have admin role</p>
     {% else %}
         <div class="jumbotron jumbotron-fluid">
             <div class="container">

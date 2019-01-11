@@ -114,6 +114,7 @@ class QuestionService implements QuestionServiceInterface
         /** @var User $user */
         $user = $this->security->getUser();
         $user->setRankFromQuiz($user->getRankFromQuiz() + $score);
+        $user->setTotalRank($user->getTotalRank() + $score);
         $this->userRepository->saveUser($user);
         $this->container->get('session')->set('score',0);
             $this->session->getFlashBag()->add("info", "You Have been rewarded with $score points");
