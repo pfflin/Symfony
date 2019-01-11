@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a029e9b-50e4-4701-8fee-1e60979966d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/QuizBundle/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuizBundle/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuizBundle/Services/LikesService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuizBundle/Services/LikesService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuizBundle/Services/QuestionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuizBundle/Services/QuestionService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/user/profile1.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +31,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/QuizBundle/Services/LikesService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -43,45 +43,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+            <state relative-caret-position="724">
+              <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
               <folding>
                 <element signature="e#41#68#0#PHP" expanded="true" />
                 <element signature="e#1524#1548#0#PHP" expanded="true" />
-                <element signature="e#1758#1783#0#PHP" expanded="true" />
                 <element signature="e#1750#1779#0#PHP" expanded="true" />
                 <element signature="e#1961#1994#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profile.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="6" column="33" selection-end-line="36" selection-end-column="14" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/QuizBundle/Repository/UserRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="91" column="42" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
-              <folding>
-                <element signature="e#42#71#0#PHP" expanded="true" />
-                <element signature="e#1384#1401#0#PHP" expanded="true" />
-                <element signature="e#1766#1783#0#PHP" expanded="true" />
-                <element signature="e#2160#2177#0#PHP" expanded="true" />
-                <element signature="e#2596#2613#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -183,14 +154,14 @@
         <option value="$PROJECT_DIR$/app/Resources/views/user/profileCommented.html.twig" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Services/QuestionServiceInterface.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Controller/LikesController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/user/profile1.html.twig" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Entity/Question.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Services/QuestionService.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Services/LikesService.php" />
         <option value="$PROJECT_DIR$/src/QuizBundle/Repository/UserRepository.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php" />
       </list>
     </option>
   </component>
@@ -439,7 +410,7 @@
       <workItem from="1546853891021" duration="10430000" />
       <workItem from="1546937339768" duration="451000" />
       <workItem from="1546940572437" duration="924000" />
-      <workItem from="1547025493869" duration="42086000" />
+      <workItem from="1547025493869" duration="42372000" />
     </task>
     <servers />
   </component>
@@ -449,7 +420,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="300235000" />
+    <option name="totallyTimeSpent" value="300521000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -464,7 +435,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33661118" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33661118" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -477,7 +448,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49924356" visible="true" weight="0.24256651" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49924356" weight="0.24256651" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50075644" side_tool="true" weight="0.3286385" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -845,23 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profile.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="6" column="33" selection-end-line="36" selection-end-column="14" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profile1.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -944,23 +898,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+        <state relative-caret-position="238">
+          <caret line="53" column="33" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/QuizBundle/Services/LikesService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
           <folding>
-            <element signature="e#41#68#0#PHP" expanded="true" />
-            <element signature="e#1524#1548#0#PHP" expanded="true" />
-            <element signature="e#1758#1783#0#PHP" expanded="true" />
-            <element signature="e#1750#1779#0#PHP" expanded="true" />
-            <element signature="e#1961#1994#0#PHP" expanded="true" />
+            <element signature="e#123#152#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/QuizBundle/Repository/UserRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="336">
           <caret line="91" column="42" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
           <folding>
             <element signature="e#42#71#0#PHP" expanded="true" />
@@ -972,12 +929,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/QuizBundle/Services/LikesService.php">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profile.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
+        <state relative-caret-position="88">
+          <caret line="7" column="34" lean-forward="true" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
           <folding>
-            <element signature="e#123#152#0#PHP" expanded="true" />
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/QuizBundle/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="724">
+          <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+          <folding>
+            <element signature="e#41#68#0#PHP" expanded="true" />
+            <element signature="e#1524#1548#0#PHP" expanded="true" />
+            <element signature="e#1750#1779#0#PHP" expanded="true" />
+            <element signature="e#1961#1994#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
