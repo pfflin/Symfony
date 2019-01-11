@@ -69,7 +69,7 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      * Many Users have liked many Questions.
-     * @ORM\ManyToMany(targetEntity="QuizBundle\Entity\Question")
+     * @ORM\ManyToMany(targetEntity="QuizBundle\Entity\Question", inversedBy="users")
      * @ORM\JoinTable(name="users_questions",
      *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="questionId", referencedColumnName="id")}
@@ -81,7 +81,7 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      * Many Users have liked many Comments.
-     * @ORM\ManyToMany(targetEntity="QuizBundle\Entity\Comment")
+     * @ORM\ManyToMany(targetEntity="QuizBundle\Entity\Comment", inversedBy="users")
      * @ORM\JoinTable(name="users_comments",
      *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="commentId", referencedColumnName="id")}
@@ -91,7 +91,7 @@ class User implements UserInterface
     private $likedComments;
     /**
      * @var ArrayCollection
-     * @ManyToMany(targetEntity="QuizBundle\Entity\Role")
+     * @ManyToMany(targetEntity="QuizBundle\Entity\Role",inversedBy="users")
      * @JoinTable(name="users_roles",
      *     joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")},
      *     inverseJoinColumns={@JoinColumn(name="role_id",referencedColumnName="id")})
