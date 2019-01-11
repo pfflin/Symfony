@@ -10,14 +10,12 @@ namespace QuizBundle\Services;
 
 
 use Doctrine\DBAL\Connection;
-use QuizBundle\Entity\Comment;
 use QuizBundle\Entity\Question;
 use QuizBundle\Entity\User;
 use QuizBundle\Repository\QuestionRepository;
 use QuizBundle\Repository\UserRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Security;
 

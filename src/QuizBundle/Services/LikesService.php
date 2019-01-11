@@ -9,13 +9,13 @@
 namespace QuizBundle\Services;
 
 
+use Doctrine\DBAL\Connection;
 use Proxies\__CG__\QuizBundle\Entity\Question;
 use QuizBundle\Entity\Comment;
 use QuizBundle\Entity\User;
 use QuizBundle\Repository\CommentRepository;
 use QuizBundle\Repository\QuestionRepository;
 use QuizBundle\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 
 class LikesService implements LikesServiceInterface
@@ -24,12 +24,14 @@ class LikesService implements LikesServiceInterface
     private $security;
     private $userRepository;
     private $commentRepository;
-    public function __construct(QuestionRepository $questionRepository,Security $security,UserRepository $userRepository,CommentRepository $commentRepository)
+    private $connection;
+    public function __construct(QuestionRepository $questionRepository,Security $security,UserRepository $userRepository,CommentRepository $commentRepository,Connection$connection)
     {
         $this->questionRepository=$questionRepository;
         $this->security=$security;
         $this->userRepository= $userRepository;
         $this->commentRepository=$commentRepository;
+        $this->connection=$connection;
     }
 
     public function addLikeQuestion($id)
@@ -60,8 +62,7 @@ class LikesService implements LikesServiceInterface
          * @var User $user
          */
         $user = $this->security->getUser();
-        $user->removeLikes($question);
-        $this->userRepository->saveUser($user);
+        $this->userRepository->deleteLike($user,$question,$this->connection);
     }
 
     public function addLikeComment($id)
@@ -95,9 +96,9 @@ class LikesService implements LikesServiceInterface
          * @var User $user
          */
         $user = $this->security->getUser();
-        $user->removeLikedComment($comment);
+
         try{
-            $this->userRepository->saveUser($user);
+            $this->userRepository->deleteLike($user,$comment,$this->connection);
             return $comment->getQuestionId();
         }catch (\Exception $exception){
             return 0;

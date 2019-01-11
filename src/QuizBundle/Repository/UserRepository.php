@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Query;
 use PDO;
+use QuizBundle\Entity\Question;
 use QuizBundle\Entity\User;
 
 /**
@@ -87,5 +88,13 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $query->where("u.id = :authorId");
         $query->setParameter("authorId",$user->getId());
         return $query->getQuery()->getResult();
+    }
+    public function deleteLike(User $user,$question,Connection $connection){
+        $userId = $user->getId();
+        $questionId = $question->getId();
+        $stm = $connection->prepare("DELETE FROM users_questions WHERE userId = :userId and questionId = :questionId ");
+        $stm->bindParam(':userId',$userId);
+        $stm->bindParam(':questionId',$questionId);
+        $stm->execute();
     }
 }
