@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+    <div class="container">
     <h1>Hello, {{ app.user.fullName }}</h1>
     <h2>Your questions</h2>
-    <ul>
+    <ul class="row">
         {% for question in questions %}
             <div class="col-md-6">
                 <article>
@@ -30,8 +31,8 @@
         {% endfor %}
     </ul>
 
-    <div class="row"><h2><a href="{{ path('user_likes') }}">Questions you liked</a></h2></div>
+    <a class="btn btn-primary btn-lg btn-block" href="{{ path('user_likes') }}">Questions you liked</a>
 
-    <div class="row"><h2><a href="{{ path('user_commented') }}">Questions you have commented on</a></h2></div>
-
+    <a class="btn btn-primary btn-lg btn-block" href="{{ path('user_commented') }}">Questions you have commented on</a>
+    </div>
 {% endblock %}

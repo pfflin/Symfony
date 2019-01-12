@@ -6,9 +6,10 @@
         <div class="col-sm-4">
             <div class="single category">
                 <h3 class="side-title">Ranking</h3>
-                <ul class="list-unstyled">
+                <ul class="list-group">
                     {% for user in users %}
-                        <li>{{ loop.index }} : <span>{{ user.fullName }}<span class="pull-right">{{ user.totalRank }}</span></span></li>
+                        <li class="list-group-item {% if app.user == user %}{{ 'active' }}{% endif %}" >
+                            {{ loop.index }} : <span>{{ user.fullName }}<span class="pull-right">{{ user.totalRank }}</span></span></li>
                     {% endfor %}
                 </ul>
             </div>
